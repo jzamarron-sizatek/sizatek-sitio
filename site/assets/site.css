@@ -37,6 +37,7 @@
   .lede{font-size:clamp(17px,1.5vw,20px);color:var(--concha-70);max-width:38em}
   section{position:relative;padding:clamp(72px,9vw,128px) 0}
   .sec-head{display:grid;gap:14px;max-width:60ch;margin-bottom:clamp(36px,5vw,64px)}
+  .sec-head .note{margin:0;color:var(--concha-70);font-size:15px;max-width:52ch}
 
   /* botones */
   .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border-radius:999px;font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.02em;border:1px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;white-space:nowrap}
