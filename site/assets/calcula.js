@@ -10,7 +10,7 @@
     casa:[
       {n:'BÁSICO',mb:120,p:399,f:2848687,slug:'basico'},
       {n:'FAMILIAR',mb:200,p:499,f:2848701,slug:'familiar'},
-      {n:'ENTRETENIMIENTO',mb:450,p:599,f:2848721,slug:'entretenimiento'},
+      {n:'ENTRETENIMIENTO',mb:450,p:599,f:2870866,slug:'entretenimiento'},
       {n:'GAMER',mb:650,p:799,f:2848745,slug:'gamer'},
       {n:'ELITE',mb:1000,p:999,f:2848765,slug:'elite'}],
     negocio:[
