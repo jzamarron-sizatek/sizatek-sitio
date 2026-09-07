@@ -218,11 +218,13 @@
   /* ── prueba de velocidad ── */
   .stz{background:var(--noche-2);border:1px solid var(--concha-08);border-radius:20px;padding:clamp(18px,3vw,32px)}
   .stz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .stz-big{background:var(--noche);border:1px solid var(--concha-08);border-radius:14px;padding:22px 24px;position:relative;overflow:hidden}
+  .stz-big{background:var(--noche);border:1px solid var(--concha-08);border-radius:18px;padding:18px 18px 14px;position:relative;text-align:center}
+  .stz-big svg{width:100%;max-width:260px;height:auto;display:block;margin:6px auto 0}
+  .stz-big .track{fill:none;stroke:var(--concha-08);stroke-width:10;stroke-linecap:round}
+  .stz-big .arc{fill:none;stroke:url(#stz-grad);stroke-width:10;stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset .35s ease;filter:drop-shadow(0 0 8px rgba(27,231,255,.55))}
   .stz-big .lbl{font-family:var(--display);font-weight:300;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--concha-70)}
-  .stz-big .val{font-family:var(--display);font-weight:900;font-size:clamp(44px,7vw,84px);line-height:1;letter-spacing:-.04em;margin-top:10px;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,var(--concha),var(--teal) 120%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stz-big .val{font-family:var(--display);font-weight:900;font-size:clamp(36px,6vw,56px);line-height:1;letter-spacing:-.04em;margin-top:-44px;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,var(--concha),var(--teal) 120%);-webkit-background-clip:text;background-clip:text;color:transparent}
   .stz-big .unit{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--concha-45);margin-top:8px}
-  .stz-bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,var(--teal),var(--luz));box-shadow:0 0 16px var(--luz);transition:width .25s}
   .stz-small{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .stz-small>div{background:var(--noche);border:1px solid var(--concha-08);border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:baseline}
   .stz-small .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--concha-45)}
@@ -235,7 +237,8 @@
   .stz-small .val.ip.no{color:var(--concha-45)} .stz-small .val.ip.ok{color:var(--teal)}
   .stz-small>div.v6ok{border-color:rgba(27,231,255,.4);box-shadow:inset 0 0 0 1px rgba(27,231,255,.15),0 0 24px -8px rgba(27,231,255,.6)}
   .stz-small>div.v6ok .lbl{color:var(--luz)} .stz-small>div.v6ok .lbl::after{content:' \2713';color:var(--luz)}
-  @media (max-width:560px){.stz-grid{grid-template-columns:1fr}.stz-small{grid-column:span 1}}
+  @media (max-width:560px){.stz-grid{grid-template-columns:1fr}.stz-small{grid-column:span 1;grid-template-columns:1fr}.stz-act .btn{width:100%;justify-content:center}}
+  @media (prefers-reduced-motion:reduce){.stz-big .arc{transition:none}}
 
   /* ── contacto ── */
   .contacto{background:linear-gradient(180deg,var(--noche) 0%,var(--noche-2) 100%)}

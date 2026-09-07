@@ -84,11 +84,11 @@
     s.setParameter('url_dl',HOST+'/backend/garbage.php');s.setParameter('url_ul',HOST+'/backend/empty.php');s.setParameter('url_ping',HOST+'/backend/empty.php');s.setParameter('url_getIp',HOST+'/backend/getIP.php');
     s.setParameter('mpot',true);s.setParameter('url_telemetry',HOST+'/results/telemetry.php');s.setParameter('telemetry_level','basic');s.setParameter('getIp_ispInfo',true);s.setParameter('getIp_ispInfo_distance','km');
     s.setParameter('test_order','IP_P_D_U');s.setParameter('time_dl_max',12);s.setParameter('time_ul_max',12);
-    function pct(v){return Math.min(100,(parseFloat(v)||0)/MAX*100)+'%'}
-    s.onupdate=function(d){dl.textContent=d.dlStatus||'0.00';ul.textContent=d.ulStatus||'0.00';pg.textContent=d.pingStatus||'0.00';jt.textContent=d.jitterStatus||'0.00';dlbar.style.width=pct(d.dlStatus);ulbar.style.width=pct(d.ulStatus);
+    var LEN=264;function arc(el,v){var q=Math.min(1,(parseFloat(v)||0)/MAX);el.style.strokeDashoffset=(LEN*(1-q)).toFixed(1)}
+    s.onupdate=function(d){dl.textContent=d.dlStatus||'0.00';ul.textContent=d.ulStatus||'0.00';pg.textContent=d.pingStatus||'0.00';jt.textContent=d.jitterStatus||'0.00';arc(dlbar,d.dlStatus);arc(ulbar,d.ulStatus);
       if(d.clientIp){ip=d.clientIp;meta.textContent=ip}
       if(d.testState>=4&&d.testId){meta.innerHTML=(ip?ip+' · ':'')+'<a href="'+HOST+'/results/?id='+encodeURIComponent(d.testId)+'">'+d.testId+'</a>'}};
     s.onend=function(){running=false;btn.disabled=false;btn.textContent='Prueba tu Velocidad'};
-    btn.addEventListener('click',function(){if(running){s.abort();return}running=true;btn.disabled=true;btn.textContent='…';dl.textContent=ul.textContent=pg.textContent=jt.textContent='0.00';dlbar.style.width=ulbar.style.width='0';s.start()});
+    btn.addEventListener('click',function(){if(running){s.abort();return}running=true;btn.disabled=true;btn.textContent='…';dl.textContent=ul.textContent=pg.textContent=jt.textContent='0.00';arc(dlbar,0);arc(ulbar,0);s.start()});
   })();
 })();
