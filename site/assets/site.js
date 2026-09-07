@@ -67,12 +67,12 @@
     var btn=document.getElementById('stz-btn');if(!btn)return;
     var _b=document.getElementById('stz-btn'),dl=document.getElementById('stz-dl'),ul=document.getElementById('stz-ul'),pg=document.getElementById('stz-ping'),jt=document.getElementById('stz-jit'),meta=document.getElementById('stz-meta'),dlbar=document.getElementById('stz-dlbar'),ulbar=document.getElementById('stz-ulbar');
     function probe(host,el){var c=new AbortController(),t=setTimeout(function(){c.abort()},6000);
-      fetch('https://'+host+'/backend/getIP.php',{signal:c.signal,cache:'no-store'}).then(function(r){return r.json()}).then(function(j){clearTimeout(t);var ip=(j&&j.processedString)||'';el.textContent=ip.split(' - ')[0]||'—';el.className='val ip '+(ip?'ok':'no')}).catch(function(){el.textContent='—';el.className='val ip no'})}
+      fetch('https://'+host+'/backend/getIP.php?cors=true&isp=true',{signal:c.signal,cache:'no-store'}).then(function(r){return r.json()}).then(function(j){clearTimeout(t);var ip=(j&&j.processedString)||'';el.textContent=ip.split(' - ')[0]||'—';el.className='val ip '+(ip?'ok':'no')}).catch(function(){el.textContent='—';el.className='val ip no'})}
     probe('v4.velocidad.sizatek.com',document.getElementById('stz-ip4'));probe('v6.velocidad.sizatek.com',document.getElementById('stz-ip6'));
     if(typeof Speedtest==='undefined'){btn.addEventListener('click',function(){location.href=HOST});return}
     var s=new Speedtest(),running=false,MAX=1000,ip='';
     s.setParameter('url_dl',HOST+'/backend/garbage.php');s.setParameter('url_ul',HOST+'/backend/empty.php');s.setParameter('url_ping',HOST+'/backend/empty.php');s.setParameter('url_getIp',HOST+'/backend/getIP.php');
-    s.setParameter('url_telemetry',HOST+'/results/telemetry.php');s.setParameter('telemetry_level','basic');s.setParameter('getIp_ispInfo',true);s.setParameter('getIp_ispInfo_distance','km');
+    s.setParameter('mpot',true);s.setParameter('url_telemetry',HOST+'/results/telemetry.php');s.setParameter('telemetry_level','basic');s.setParameter('getIp_ispInfo',true);s.setParameter('getIp_ispInfo_distance','km');
     s.setParameter('test_order','IP_P_D_U');s.setParameter('time_dl_max',12);s.setParameter('time_ul_max',12);
     function pct(v){return Math.min(100,(parseFloat(v)||0)/MAX*100)+'%'}
     s.onupdate=function(d){dl.textContent=d.dlStatus||'0.00';ul.textContent=d.ulStatus||'0.00';pg.textContent=d.pingStatus||'0.00';jt.textContent=d.jitterStatus||'0.00';dlbar.style.width=pct(d.dlStatus);ulbar.style.width=pct(d.ulStatus);
