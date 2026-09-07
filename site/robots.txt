@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sizatek.com/sitemap.xml
