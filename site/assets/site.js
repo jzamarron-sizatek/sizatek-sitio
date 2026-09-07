@@ -1,12 +1,13 @@
 (function(){
   // menú móvil
   var mb=document.getElementById('menuBtn'),dr=document.getElementById('drawer');
-  mb.addEventListener('click',function(){var o=dr.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
-  dr.addEventListener('click',function(e){if(e.target.tagName==='A'){dr.classList.remove('open');mb.setAttribute('aria-expanded','false')}});
+  if(mb&&dr){mb.addEventListener('click',function(){var o=dr.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  dr.addEventListener('click',function(e){if(e.target.tagName==='A'){dr.classList.remove('open');mb.setAttribute('aria-expanded','false')}});}
 
   // Residencial / Negocio
   var segs=document.querySelectorAll('.seg button'),res=document.getElementById('ladder-res'),neg=document.getElementById('ladder-neg');
   function show(k){
+    if(!res||!neg)return;
     segs.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.seg===k))});
     res.hidden=(k!=='res');neg.hidden=(k!=='neg');
     var act=k==='res'?res:neg;
@@ -17,14 +18,17 @@
   document.querySelectorAll('[data-seg-link]').forEach(function(a){a.addEventListener('click',function(){show(a.dataset.segLink)})});
 
   // formulario → WhatsApp con los datos capturados (sin texto adicional)
-  document.getElementById('formContacto').addEventListener('submit',function(e){
+  var fc=document.getElementById('formContacto');
+  if(fc)fc.addEventListener('submit',function(e){
     e.preventDefault();
     var f=e.target,parts=[f.nombre.value,f.tel.value,f.correo.value,f.msg.value].filter(Boolean);
     window.open('https://wa.me/5216567646127?text='+encodeURIComponent(parts.join('\n')),'_blank');
   });
 
   // hero: luz viajando por hilos de fibra (Canvas)
-  var cv=document.getElementById('fibra'),ctx=cv.getContext('2d'),W,H,strands=[],pulses=[];
+  var cv=document.getElementById('fibra');
+  if(cv){
+  var ctx=cv.getContext('2d'),W,H,strands=[],pulses=[];
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function size(){var r=cv.parentElement.getBoundingClientRect();W=cv.width=r.width*devicePixelRatio;H=cv.height=r.height*devicePixelRatio;build()}
   function build(){
@@ -54,11 +58,14 @@
     if(!reduce)requestAnimationFrame(draw);
   }
   size();draw();
+  var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){size();if(reduce)draw()},150)});
+  }
 
   // ── Prueba de velocidad (LibreSpeed en velocidad.sizatek.com) ──
   (function(){
     var HOST='https://velocidad.sizatek.com';
-    var btn=document.getElementById('stz-btn'),dl=document.getElementById('stz-dl'),ul=document.getElementById('stz-ul'),pg=document.getElementById('stz-ping'),jt=document.getElementById('stz-jit'),meta=document.getElementById('stz-meta'),dlbar=document.getElementById('stz-dlbar'),ulbar=document.getElementById('stz-ulbar');
+    var btn=document.getElementById('stz-btn');if(!btn)return;
+    var _b=document.getElementById('stz-btn'),dl=document.getElementById('stz-dl'),ul=document.getElementById('stz-ul'),pg=document.getElementById('stz-ping'),jt=document.getElementById('stz-jit'),meta=document.getElementById('stz-meta'),dlbar=document.getElementById('stz-dlbar'),ulbar=document.getElementById('stz-ulbar');
     function probe(host,el){var c=new AbortController(),t=setTimeout(function(){c.abort()},6000);
       fetch('https://'+host+'/backend/getIP.php',{signal:c.signal,cache:'no-store'}).then(function(r){return r.json()}).then(function(j){clearTimeout(t);var ip=(j&&j.processedString)||'';el.textContent=ip.split(' - ')[0]||'—';el.className='val ip '+(ip?'ok':'no')}).catch(function(){el.textContent='—';el.className='val ip no'})}
     probe('v4.velocidad.sizatek.com',document.getElementById('stz-ip4'));probe('v6.velocidad.sizatek.com',document.getElementById('stz-ip6'));
@@ -74,5 +81,4 @@
     s.onend=function(){running=false;btn.disabled=false;btn.textContent='Prueba tu Velocidad'};
     btn.addEventListener('click',function(){if(running){s.abort();return}running=true;btn.disabled=true;btn.textContent='…';dl.textContent=ul.textContent=pg.textContent=jt.textContent='0.00';dlbar.style.width=ulbar.style.width='0';s.start()});
   })();
-  var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){size();if(reduce)draw()},150)});
 })();
