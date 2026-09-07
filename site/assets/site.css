@@ -121,6 +121,9 @@
   .bar .mb small{font-weight:300;font-size:11px;letter-spacing:.2em;margin-left:8px;color:var(--concha-70)}
   .up{font-family:var(--mono);font-size:12px;color:var(--concha-45);letter-spacing:.08em}
   .up b{color:var(--concha-70);font-weight:500}
+  .up{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+  .up .v6{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;border:1px solid rgba(27,231,255,.35);background:rgba(27,231,255,.07);color:var(--luz);font-size:10.5px;letter-spacing:.1em;white-space:nowrap}
+  .up .v6::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--luz);box-shadow:0 0 8px var(--luz)}
   .price{text-align:right;display:grid;gap:8px;justify-items:end}
   .price .amt{font-family:var(--display);font-weight:700;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
   .price .amt small{font-weight:300;font-size:12px;letter-spacing:.14em;color:var(--concha-45);margin-left:4px}
