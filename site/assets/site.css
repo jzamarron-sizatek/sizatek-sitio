@@ -264,6 +264,10 @@
   .v6live.ok{border-color:rgba(27,231,255,.4);color:var(--luz)}
   .v6live.ok i{background:var(--luz);opacity:1;box-shadow:0 0 10px var(--luz);animation:v6pulse 2.4s ease-in-out infinite}
   @keyframes v6pulse{50%{box-shadow:0 0 3px var(--luz)}}
+  .flegal{font-size:13px}
+  .flegal li{break-inside:avoid}
+  .flegal li{margin-bottom:6px}
+  @media (min-width:981px){footer .fgrid{grid-template-columns:1fr .7fr 1.7fr}.fcol ul.flegal{display:block;columns:2;column-gap:28px}.fcol ul.flegal li{margin-bottom:9px}}
   .fbottom{margin-top:clamp(36px,5vw,56px);padding-top:24px;border-top:1px solid var(--concha-08);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:12px;color:var(--concha-45)}
   .distintivo{display:inline-block;margin-top:22px;background:#fff;border-radius:12px;padding:10px 14px}
   .distintivo img{display:block;width:220px;height:auto}
