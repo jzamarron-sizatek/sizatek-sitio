@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Contáctanos - Sizatek.com</title>
-<meta name="description" content="Descubre tu Internet Ideal con Nosotros.">
-<link rel="canonical" href="https://sizatek.com/contacto/">
+<title>Calcula tu paquete - Sizatek.com</title>
+<meta name="description" content="Calcula tu paquete. Internet a Medida.">
+<link rel="canonical" href="https://sizatek.com/calcula/">
 <link rel="icon" type="image/png" href="/assets/logo-iso.png">
-<meta property="og:title" content="Contáctanos - Sizatek.com">
-<meta property="og:description" content="Descubre tu Internet Ideal con Nosotros.">
+<meta property="og:title" content="Calcula tu paquete - Sizatek.com">
+<meta property="og:description" content="Calcula tu paquete. Internet a Medida.">
 <meta property="og:image" content="https://sizatek.com/assets/logo-sizatek.png">
-<meta property="og:url" content="https://sizatek.com/contacto/">
+<meta property="og:url" content="https://sizatek.com/calcula/">
 <meta name="theme-color" content="#050B1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Geologica:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -40,43 +40,23 @@
   <div class="drawer" id="drawer">
     <div class="wrap">
       <a href="/">Inicio</a><a href="/paquetes/">Paquetes</a><a href="/velocidad/">Prueba tu Velocidad</a><a href="/ayuda/">FAQs</a><a href="/nosotros/">Nosotros</a>
-      <a href="/calcula/">Calcula tu paquete</a>
+      <a class="on" href="/calcula/">Calcula tu paquete</a>
       <a href="https://clientes.sizatek.com/cliente/login">Mi Portal Sizatek</a>
     </div>
   </div>
 </header>
 
 
-<!-- ─────────────── CONTACTO ─────────────── -->
-<section class="contacto" id="contacto" style="padding-top:clamp(40px,6vw,72px)">
+<!-- ─────────────── CALCULA TU PAQUETE ─────────────── -->
+<section class="calc" id="calcula" style="padding-top:clamp(40px,6vw,72px)">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Contáctanos</p>
-      <h2>Descubre tu Internet Ideal con Nosotros.</h2>
+      <p class="eyebrow">Calcula tu paquete</p>
+      <h2>Internet a Medida</h2>
     </div>
-    <div class="contact-grid">
-    <form class="form" id="formContacto">
-      <input type="text" name="nombre" placeholder="Nombre Completo" autocomplete="name">
-      <input type="tel" name="tel" placeholder="Telef. Celular (WhatsApp)" autocomplete="tel">
-      <input type="email" name="correo" placeholder="Correo Electrónico" autocomplete="email" style="grid-column:span 2">
-      <textarea name="msg" placeholder="Deja aquí tu mensaje..."></textarea>
-      <div class="row">
-        <a class="btn btn-ghost" href="/paquetes/" style="font-size:12px">Internet a Medida</a>
-        <button class="btn btn-luz" type="submit">Enviar</button>
-      </div>
-    </form>
-    <div>
-      <ul class="info-list">
-        <h3>Horario de la Sucursal</h3>
-        <li>L - V 8:00 a.m. a 18:00 p.m.</li><li>S de 9:00 a.m. a 14:00 p.m.</li><li><a href="mailto:soporte@sizatek.com">soporte@sizatek.com</a></li><li><a href="tel:6366882049">Tel: 6366882049</a></li>
-        <h3>Horarios de Atención al Cliente</h3>
-        <li>Los 365 Días Del Año Por Correo Electrónico Y/O Teléfono.</li><li><a href="mailto:Soporte@Sizatek.com">Soporte@Sizatek.com</a></li><li><a href="mailto:contacto@sizatek.com">contacto@sizatek.com</a></li><li>Tel: 636 688 2049 / 656 764 6127</li>
-        <h3>Nuestra ubicación.</h3>
-        <li>Dirección: 20 de Nov. 3510, Burócrata, 31750 Nuevo Casas Grandes, Chih.</li>
-        <li><a href="https://www.google.com/maps/place/Sizatek/@30.3963995,-107.9029132,15z/data=!4m2!3m1!1s0x0:0x862a76a33a48b72e?sa=X&ved=1t:2428&ictx=111">Nuestra ubicación.</a></li>
-      </ul>
-      <div class="row-cta"><a class="btn btn-wa" href="https://wa.me/5216567646127">656 764 6127</a><a class="btn btn-ghost" href="https://clientes.sizatek.com/cliente/login">Mi Portal Sizatek</a></div>
-    </div>
+    <div class="wiz" id="wiz">
+      <div class="wiz-top"><button class="wiz-back" id="wizBack" type="button" hidden>&larr; Atrás</button><div class="wiz-prog"><i id="wizProg"></i></div><span class="wiz-step" id="wizStep"></span></div>
+      <div class="wiz-body" id="wizBody"></div>
     </div>
   </div>
 </section>
@@ -122,5 +102,6 @@
 
 
 <script src="/assets/site.js?v=6" defer></script>
+<script src="/assets/calcula.js?v=6" defer></script>
 </body>
 </html>

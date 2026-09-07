@@ -345,3 +345,45 @@ html.has-intro{overflow:hidden}
 @keyframes intro-out{from{opacity:1}to{opacity:0;visibility:hidden}}
 @keyframes intro-zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
 #intro.skip{transition:opacity .6s;opacity:0}
+
+/* ───────── calcula tu paquete ───────── */
+.wiz{max-width:860px;background:var(--noche-2);border:1px solid var(--concha-08);border-radius:var(--r);padding:clamp(18px,3vw,34px);position:relative;overflow:clip}
+.wiz::before{content:'';position:absolute;inset:-40% -20% auto;height:70%;background:radial-gradient(ellipse at 50% 0,rgba(27,231,255,.10),transparent 60%);pointer-events:none}
+.wiz-top{display:flex;align-items:center;gap:16px;margin-bottom:clamp(22px,3vw,34px);position:relative}
+.wiz-back{background:none;border:0;color:var(--teal);font-family:var(--mono);font-size:12px;letter-spacing:.1em;cursor:pointer;padding:6px 0;white-space:nowrap}
+.wiz-prog{flex:1;height:4px;border-radius:4px;background:var(--concha-08);overflow:hidden}
+.wiz-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--luz));box-shadow:0 0 12px rgba(27,231,255,.6);transition:width .4s cubic-bezier(.2,.8,.2,1)}
+.wiz-step{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--concha-45);min-width:40px;text-align:right}
+.wiz-body{position:relative;opacity:0;transform:translateY(10px)}
+.wiz-body.in{animation:wizin .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes wizin{to{opacity:1;transform:none}}
+.wiz-q{display:grid;gap:8px;margin-bottom:clamp(18px,2.5vw,28px)}
+.wiz-q h3{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em;line-height:1.15}
+.wiz-q p{margin:0;color:var(--concha-45);font-size:14px}
+.wiz-ico{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(27,231,255,.08);border:1px solid rgba(27,231,255,.25);color:var(--luz)}
+.wiz-ico svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.wiz-ico.sm{width:38px;height:38px;background:transparent;border-color:var(--concha-08);color:var(--teal)}
+.wiz-opts{display:grid;gap:10px}
+.wiz-opts.cols{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.wiz-opt{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:16px 18px;border-radius:14px;background:var(--noche);border:1px solid var(--concha-08);color:var(--concha);font:inherit;cursor:pointer;transition:border-color .2s,transform .2s,background .2s;position:relative}
+.wiz-opt b{font-family:var(--display);font-weight:500;font-size:16px;letter-spacing:.02em}
+.wiz-opt small{color:var(--concha-45);font-size:13px}
+.wiz-opt:hover{border-color:rgba(79,179,181,.6);transform:translateY(-1px)}
+.wiz-opt.sel{border-color:var(--luz);background:rgba(27,231,255,.08);box-shadow:0 0 0 1px rgba(27,231,255,.3),0 0 24px -8px rgba(27,231,255,.6)}
+.wiz-opt.sel::after{content:'\2713';position:absolute;right:14px;top:14px;color:var(--luz);font-size:14px}
+.wiz-opts:not(.cols) .wiz-opt{flex-direction:row;align-items:center;gap:14px}
+.wiz-opts:not(.cols) .wiz-opt b{flex:0 0 auto}
+.wiz-res{display:grid;gap:18px}
+.wiz-res .rung{background:var(--noche)}
+.wiz-plan{display:grid;grid-template-columns:minmax(150px,.95fr) minmax(0,3fr) auto;align-items:center;gap:clamp(12px,2vw,28px);padding:18px clamp(16px,2vw,26px)}
+.wiz-sum{display:flex;flex-wrap:wrap;gap:8px}
+.wiz-sum span{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--concha-70);padding:6px 10px;border-radius:999px;border:1px solid var(--concha-08);background:var(--noche)}
+.wiz-links{display:flex;flex-wrap:wrap;gap:10px}
+.wiz-links .btn{font-size:11px;padding:10px 14px}
+.wiz-again{justify-self:start;background:none;border:0;color:var(--teal);font-family:var(--mono);font-size:12px;letter-spacing:.1em;cursor:pointer;padding:4px 0}
+@media (max-width:720px){
+  .wiz-plan{grid-template-columns:1fr}
+  .wiz-plan .price{text-align:left;justify-items:start;grid-template-columns:1fr auto;align-items:center;width:100%}
+  .wiz-plan .price .btn{justify-self:end}
+  .wiz-opts.cols{grid-template-columns:1fr 1fr}
+}
