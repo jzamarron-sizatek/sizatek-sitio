@@ -308,3 +308,28 @@
   .info-list h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:18px 0 6px}
   .info-list a{color:var(--concha)}
   @media (max-width:640px){section{padding:44px 0}.sec-head{margin-bottom:22px}}
+
+/* ───────── intro animado (una vez por sesión) ───────── */
+#intro{position:fixed;inset:0;z-index:1000;background:#050B1A;display:none;cursor:pointer;overflow:hidden;-webkit-tap-highlight-color:transparent;--lw:clamp(250px,46vmin,560px)}
+html.has-intro #intro{display:block}
+html.has-intro{overflow:hidden}
+#intro canvas{position:absolute;inset:0;display:block}
+#intro .intro-logo{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+#intro .intro-iso{width:calc(var(--lw)*.352);height:auto;opacity:0;transform:scale(.45);filter:drop-shadow(0 0 22px rgba(27,231,255,.35))}
+#intro .intro-wordwrap{position:relative;display:block;width:var(--lw);margin-top:calc(var(--lw)*.07);line-height:0}
+#intro .intro-word{width:100%;height:auto;opacity:0;clip-path:inset(0 100% 0 0)}
+#intro .intro-bar{position:absolute;top:-12%;height:124%;width:5px;left:0;background:linear-gradient(180deg,rgba(27,231,255,0),#fff 40%,#fff 60%,rgba(27,231,255,0));opacity:0;filter:blur(.6px);box-shadow:0 0 18px 5px rgba(27,231,255,.75)}
+#intro .intro-tag{width:var(--lw);height:auto;margin-top:calc(var(--lw)*.046);opacity:0;transform:translateY(12px)}
+#intro.p-iso .intro-iso{animation:intro-iso .9s cubic-bezier(.18,.9,.28,1.22) both}
+#intro.p-word .intro-word{animation:intro-word .8s cubic-bezier(.4,0,.2,1) both}
+#intro.p-word .intro-bar{animation:intro-bar .8s cubic-bezier(.4,0,.2,1) both}
+#intro.p-tag .intro-tag{animation:intro-tag .7s cubic-bezier(.2,.8,.2,1) both}
+#intro.p-out{animation:intro-out .8s cubic-bezier(.4,0,.2,1) both}
+#intro.p-out .intro-logo{animation:intro-zoom .8s cubic-bezier(.4,0,.2,1) both}
+@keyframes intro-iso{from{opacity:0;transform:scale(.45) rotate(-40deg)}60%{opacity:1}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes intro-word{from{opacity:1;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes intro-bar{from{opacity:1;left:0}85%{opacity:1}to{opacity:0;left:100%}}
+@keyframes intro-tag{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes intro-out{from{opacity:1}to{opacity:0;visibility:hidden}}
+@keyframes intro-zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+#intro.skip{transition:opacity .6s;opacity:0}

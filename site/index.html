@@ -15,8 +15,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Geologica:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
+<script>(function(){try{if(sessionStorage.getItem('sz-intro')!=='1'&&!(matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))document.documentElement.classList.add('has-intro');}catch(e){}})();</script>
 </head>
 <body>
+<div id="intro" aria-hidden="true">
+  <canvas></canvas>
+  <div class="intro-logo">
+    <img class="intro-iso" src="/assets/logo-iso.png" alt="">
+    <span class="intro-wordwrap"><img class="intro-word" src="/assets/logo-wordmark-lockup.png" alt=""><i class="intro-bar"></i></span>
+    <img class="intro-tag" src="/assets/logo-tagline.png" alt="">
+  </div>
+</div>
 <!-- ─────────────── NAV ─────────────── -->
 <header class="nav">
   <div class="wrap">
@@ -179,5 +188,6 @@
 
 
 <script src="/assets/site.js" defer></script>
+<script src="/assets/intro.js" defer></script>
 </body>
 </html>
