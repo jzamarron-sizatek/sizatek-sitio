@@ -61,6 +61,30 @@
   var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){size();if(reduce)draw()},150)});
   }
 
+  // ── Verificador de cobertura (inicio): la base de cajas vive en el NAS, aquí solo llega sí/no ──
+  (function(){
+    var box=document.getElementById('cob');if(!box)return;
+    var gps=document.getElementById('cobGps'),res=document.getElementById('cobRes'),note=document.getElementById('cobNote'),mapEl=document.getElementById('cobMap');
+    var API='https://velocidad.sizatek.com/api/cobertura',WA='https://wa.me/5216567646127';
+    var ico='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.1 5.1 0 0 0 3.1.6 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    var map=null,pin=null;
+    function initMap(){if(map||typeof L==='undefined')return;map=L.map(mapEl,{zoomControl:true,attributionControl:true,scrollWheelZoom:false}).setView([30.4125,-107.9165],13);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+      map.on('click',function(e){place(e.latlng.lat,e.latlng.lng);consulta(e.latlng.lat,e.latlng.lng)});}
+    function place(lat,lon){if(!map)return;var ll=[lat,lon];if(!pin){pin=L.marker(ll,{draggable:true,icon:L.divIcon({className:'',html:'<div class="cob-pin"></div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(map);pin.on('dragend',function(){var p=pin.getLatLng();consulta(p.lat,p.lng)})}else pin.setLatLng(ll);map.setView(ll,Math.max(map.getZoom(),16))}
+    function show(ok){res.hidden=false;res.className='cob-res '+(ok?'ok':'no');
+      res.innerHTML=ok?'<div class="k"><i></i>Cobertura</div><p class="z">Nuevo Casas Grandes y Casas Grandes, Chihuahua.</p><a class="btn btn-wa" href="'+WA+'">'+ico+'AGENDAR MI INSTALACIÓN</a>'
+                      :'<div class="k"><i></i>Sujeto a cobertura.</div><a class="btn btn-wa" href="'+WA+'">'+ico+'Contáctanos</a>';}
+    function consulta(lat,lon){res.hidden=false;res.className='cob-res';res.innerHTML='<div class="k"><i></i>…</div>';note.textContent='';
+      var c=new AbortController(),t=setTimeout(function(){c.abort()},8000);
+      fetch(API+'?lat='+lat.toFixed(5)+'&lon='+lon.toFixed(5),{signal:c.signal,cache:'no-store'}).then(function(r){clearTimeout(t);return r.json()}).then(function(j){show(!!j.cobertura)}).catch(function(){res.hidden=true;note.textContent='—'});}
+    gps.addEventListener('click',function(){initMap();if(!navigator.geolocation){note.textContent='—';return}
+      gps.disabled=true;var h=gps.innerHTML;gps.textContent='…';
+      navigator.geolocation.getCurrentPosition(function(p){gps.disabled=false;gps.innerHTML=h;place(p.coords.latitude,p.coords.longitude);consulta(p.coords.latitude,p.coords.longitude);note.textContent='GPS ±'+Math.round(p.coords.accuracy)+' m'},
+        function(){gps.disabled=false;gps.innerHTML=h;note.textContent='—'},{enableHighAccuracy:true,timeout:15000,maximumAge:0})});
+    if('IntersectionObserver' in window){new IntersectionObserver(function(en,o){if(en[0].isIntersecting){initMap();o.disconnect()}},{rootMargin:'200px'}).observe(mapEl)}else initMap();
+  })();
+
   // ── Indicador IPv6 en vivo (pie de todas las páginas) ──
   (function(){
     var el=document.getElementById('v6live');if(!el)return;var ipEl=document.getElementById('v6live-ip');
