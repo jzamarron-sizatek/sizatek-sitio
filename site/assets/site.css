@@ -158,11 +158,14 @@
   .uso::before{content:"";position:absolute;inset:0;background:var(--g);opacity:.9}
   .uso::after{content:"";position:absolute;inset:auto -30% -40% -30%;height:70%;background:radial-gradient(closest-side,rgba(27,231,255,.35),transparent);filter:blur(10px)}
   .uso>*{position:relative}
+  .uso .art{position:absolute;left:0;right:0;top:0;height:60%;width:100%;padding:14px 10px 0;opacity:.95;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+  .uso .glyph{display:none}
+  .uso{min-height:400px}
   .uso .glyph{position:absolute;top:18px;right:18px;width:52px;height:52px;opacity:.9}
   .uso h3{font-weight:500;font-size:clamp(16px,1.4vw,19px)}
   .uso .btn{align-self:flex-start;padding:10px 14px;font-size:11px}
   @media (max-width:980px){.usos{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:520px){.usos{grid-template-columns:1fr}.uso{min-height:220px}}
+  @media (max-width:520px){.usos{grid-template-columns:1fr}.uso{min-height:340px}}
 
   /* ── beneficios ── */
   .difs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -299,7 +302,7 @@
   .home-plans .planes-head{margin-bottom:22px}
   .home-plans h2 b{font-size:clamp(36px,6vw,72px)}
   .row-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-  @media (max-width:640px){.usos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 calc(-1*clamp(18px,4vw,40px));padding:0 clamp(18px,4vw,40px) 6px}.uso{flex:0 0 72%;min-height:200px;scroll-snap-align:start}}
+  @media (max-width:640px){.usos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 calc(-1*clamp(18px,4vw,40px));padding:0 clamp(18px,4vw,40px) 6px}.uso{flex:0 0 78%;min-height:340px;scroll-snap-align:start}}
   /* pie compacto */
   .fgrid{grid-template-columns:1.4fr 1fr 1fr}
   @media (max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
