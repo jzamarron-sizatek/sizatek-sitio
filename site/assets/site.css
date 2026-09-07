@@ -47,6 +47,7 @@
   .btn-ghost{border-color:var(--concha-15);color:var(--concha);background:transparent}
   .btn-ghost:hover{border-color:var(--teal);background:var(--concha-08)}
   .btn-wa{background:#25D366;color:#06210F}
+  .btn-tg{background:#2AABEE;color:#04203A}
   .btn-wa:hover{box-shadow:0 8px 32px -8px rgba(37,211,102,.6)}
   .btn svg{width:16px;height:16px;flex:none}
 
@@ -282,6 +283,8 @@
   /* flotante WhatsApp */
   .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-content:center;color:#06210F;box-shadow:0 12px 30px -8px rgba(37,211,102,.7)}
   .wa-float svg{width:28px;height:28px}
+  .tg-float{position:fixed;right:18px;bottom:88px;z-index:60;width:58px;height:58px;border-radius:50%;background:#2AABEE;display:grid;place-content:center;color:#fff;box-shadow:0 12px 30px -8px rgba(42,171,238,.7)}
+  .tg-float svg{width:26px;height:26px;margin-left:-2px}
 
   @media (prefers-reduced-motion:reduce){
     .ticker-track{animation:none}
