@@ -61,13 +61,23 @@
   var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){size();if(reduce)draw()},150)});
   }
 
+  // ── Indicador IPv6 en vivo (pie de todas las páginas) ──
+  (function(){
+    var el=document.getElementById('v6live');if(!el)return;var ipEl=document.getElementById('v6live-ip');
+    function show(ip){el.className='v6live '+(ip?'ok':'no');ipEl.textContent=ip||'';if(ip)el.title=ip}
+    var cached=null;try{cached=sessionStorage.getItem('sz-v6')}catch(e){}
+    if(cached!==null){show(cached);return}
+    var c=new AbortController(),t=setTimeout(function(){c.abort()},6000);
+    fetch('https://v6.velocidad.sizatek.com/backend/getIP.php?cors=true',{signal:c.signal,cache:'no-store'}).then(function(r){return r.json()}).then(function(x){clearTimeout(t);var ip=((x&&x.processedString)||'').split(' - ')[0];show(ip);try{sessionStorage.setItem('sz-v6',ip)}catch(e){}}).catch(function(){show('');try{sessionStorage.setItem('sz-v6','')}catch(e){}});
+  })();
+
   // ── Prueba de velocidad (LibreSpeed en velocidad.sizatek.com) ──
   (function(){
     var HOST='https://velocidad.sizatek.com';
     var btn=document.getElementById('stz-btn');if(!btn)return;
     var _b=document.getElementById('stz-btn'),dl=document.getElementById('stz-dl'),ul=document.getElementById('stz-ul'),pg=document.getElementById('stz-ping'),jt=document.getElementById('stz-jit'),meta=document.getElementById('stz-meta'),dlbar=document.getElementById('stz-dlbar'),ulbar=document.getElementById('stz-ulbar');
     function probe(host,el){var c=new AbortController(),t=setTimeout(function(){c.abort()},6000);
-      fetch('https://'+host+'/backend/getIP.php?cors=true&isp=true',{signal:c.signal,cache:'no-store'}).then(function(r){return r.json()}).then(function(j){clearTimeout(t);var ip=(j&&j.processedString)||'';el.textContent=ip.split(' - ')[0]||'—';el.className='val ip '+(ip?'ok':'no')}).catch(function(){el.textContent='—';el.className='val ip no'})}
+      fetch('https://'+host+'/backend/getIP.php?cors=true&isp=true',{signal:c.signal,cache:'no-store'}).then(function(r){return r.json()}).then(function(j){clearTimeout(t);var ip=(j&&j.processedString)||'';el.textContent=ip.split(' - ')[0]||'—';el.className='val ip '+(ip?'ok':'no');if(ip&&el.id==='stz-ip6')el.parentNode.classList.add('v6ok')}).catch(function(){el.textContent='—';el.className='val ip no'})}
     probe('v4.velocidad.sizatek.com',document.getElementById('stz-ip4'));probe('v6.velocidad.sizatek.com',document.getElementById('stz-ip6'));
     if(typeof Speedtest==='undefined'){btn.addEventListener('click',function(){location.href=HOST});return}
     var s=new Speedtest(),running=false,MAX=1000,ip='';
