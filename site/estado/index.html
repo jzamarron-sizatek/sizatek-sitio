@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ayuda en Línea - Sizatek.com</title>
-<meta name="description" content="Encuentra Respuestas a tus Preguntas sobre Nuestro Servicio de Internet.">
-<link rel="canonical" href="https://sizatek.com/ayuda/">
+<title>Estado de servicios - Sizatek.com</title>
+<meta name="description" content="Estado de servicios. Red, juegos, bancos y apps.">
+<link rel="canonical" href="https://sizatek.com/estado/">
 <link rel="icon" type="image/png" href="/assets/logo-iso.png">
-<meta property="og:title" content="Ayuda en Línea - Sizatek.com">
-<meta property="og:description" content="Encuentra Respuestas a tus Preguntas sobre Nuestro Servicio de Internet.">
+<meta property="og:title" content="Estado de servicios - Sizatek.com">
+<meta property="og:description" content="Estado de servicios. Red, juegos, bancos y apps.">
 <meta property="og:image" content="https://sizatek.com/assets/logo-sizatek.png">
-<meta property="og:url" content="https://sizatek.com/ayuda/">
+<meta property="og:url" content="https://sizatek.com/estado/">
 <meta name="theme-color" content="#050B1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Geologica:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -28,7 +28,7 @@
       <a href="/">Inicio</a>
       <a href="/paquetes/">Paquetes</a>
       <a href="/velocidad/">Prueba tu Velocidad</a>
-      <a class="on" href="/ayuda/">FAQs</a>
+      <a href="/ayuda/">FAQs</a>
       <a href="/nosotros/">Nosotros</a>
     </nav>
     <div class="nav-cta">
@@ -47,33 +47,17 @@
 </header>
 
 
-<!-- ─────────────── PAGO + FAQ ─────────────── -->
-<section id="faqs" style="padding-top:clamp(40px,6vw,72px)">
-  <div class="wrap two">
-    <div>
-      <div class="sec-head">
-        <p class="eyebrow">Ayuda en Línea.</p>
-        <h2>Encuentra Respuestas a tus Preguntas sobre Nuestro Servicio de Internet.</h2>
-      </div>
-      <div class="faq">
-      <details open><summary>¿Cuáles son los beneficios del internet de fibra óptica?</summary><div class="body">Ideal para actividades como las videollamadas y la carga de archivos grandes. El internet de fibra óptica también es menos susceptible a las interferencias y las interrupciones que las conexiones por cable o DSL.</div></details>
-      <details><summary>¿Está disponible el internet de fibra óptica de Sizatek en mi área?</summary><div class="body">Como empresa local en Chihuahua, ofrecemos el servicio de internet con fibra óptica en Nuevo Casas Grandes, Sección Hidalgo, Casas Grandes y  Buena Fe.</div></details>
-      <details><summary>¿Cuánto cuesta el internet de fibra óptica de Sizatek?</summary><div class="body">El costo del internet de fibra óptica de Sizatek varía según el plan de velocidad y las promociones disponibles en el momento.  Como empresa local en Chihuahua, ofrecemos servicio en Nuevo Casas Grandes, Sección Hidalgo, Casas Grandes y Buena Fe (Chihuahua). Visita nuestra página de planes y precios para obtener información detallada y elegir el mejor plan para ti.</div></details>
-      </div>
+<!-- ─────────────── ESTADO DE SERVICIOS ─────────────── -->
+<section class="est" id="estado" style="padding-top:clamp(40px,6vw,72px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Estado de servicios</p>
+      <h2>Red, juegos, bancos y apps</h2>
+      <p class="note">Revisión automática cada minuto desde la red de Sizatek. No es información oficial de los servicios mencionados; para su estado oficial consulta el enlace de cada uno.</p>
     </div>
-    <div>
-      <div class="sec-head">
-        <p class="eyebrow">Pago</p>
-        <h2 style="font-size:clamp(22px,2.6vw,32px)">Ofrecemos las siguientes formas de pago</h2>
-      </div>
-      <div class="pago">
-        <div class="pago-item"><h3>Efectivo:</h3><p>Sucursal Nuevo Casas Grandes:</p><p>Dirección: Avenida 20 de Noviembre 3510</p><p>Colonia: Burócrata</p></div>
-        <div class="pago-item"><h3>Pago con terminal bancaria:</h3><p>Sucursal Nuevo Casas Grandes:</p><p>Dirección: Avenida 20 de Noviembre 3510</p><p>Colonia: Burócrata</p></div>
-        <div class="pago-item"><details><summary>Depósito o transferencia bancaria:</summary><div style="display:grid;gap:6px;margin-top:10px"><p>Banco BBVA:</p><p class="mono">Cuenta: 0116970141</p><p class="mono">Clabe: 012420001169701419</p><p><b>Importante:</b> Enviar comprobante de pago vía WhatsApp al 6567646127 o correo electrónico: contacto@sizatek.com</p></div></details></div>
-        <div class="pago-item"><h3>Pagos referenciados:</h3><p>Comunícate con nosotros vía WhatsApp para generar un link de pago para establecimientos como Alsuper, Waldo's y Soriana.</p></div>
-      </div>
-      
-    </div>
+    <div class="est-top" id="estTop"><span class="est-dot"></span><div><b id="estTitulo">Consultando…</b><small id="estHora"></small></div></div>
+    <div class="est-grid" id="estGrid"></div>
+    <p class="est-leyenda"><span><i class="ok"></i>Accesible</span><span><i class="degradado"></i>Con fallas</span><span><i class="falla"></i>Sin respuesta</span><span><i class="mantenimiento"></i>En mantenimiento</span><span><i class="desconocido"></i>Sin datos</span></p>
   </div>
 </section>
 
@@ -119,5 +103,6 @@
 
 
 <script src="/assets/site.js?v=12" defer></script>
+<script src="/assets/estado.js?v=13" defer></script>
 </body>
 </html>

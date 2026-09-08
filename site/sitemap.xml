@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sizatek.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://sizatek.com/calcula/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sizatek.com/estado/</loc><changefreq>always</changefreq><priority>0.6</priority></url>
   <url><loc>https://sizatek.com/paquetes/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sizatek.com/nosotros/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://sizatek.com/velocidad/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
