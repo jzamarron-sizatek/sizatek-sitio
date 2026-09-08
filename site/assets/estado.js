@@ -22,10 +22,23 @@
     var g=d.estado||'desconocido';
     top.className='est-top '+g;tit.textContent=GEN[g]||GEN.desconocido;
     hora.textContent=d.actualizado?'Última revisión: '+fecha(d.actualizado):'';
-    grid.innerHTML=(d.grupos||[]).map(function(gr){
+    // Dos columnas repartidas por número de renglones para que no queden
+    // huecos (la Red Sizatek es corta y Juegos es larga): la primera tarjeta
+    // siempre va a la izquierda, las demás a la columna más corta.
+    var gs=(d.grupos||[]).map(function(gr){
       var e=gr.estado||'desconocido';
-      return'<section class="est-card"><header><h3>'+esc(gr.nombre)+'</h3><span class="est-badge '+e+'"><i></i>'+TXT[e]+'</span></header><ul>'+(gr.servicios||[]).map(svc).join('')+'</ul></section>';
-    }).join('');
+      return{n:(gr.servicios||[]).length+2,html:'<section class="est-card"><header><h3>'+esc(gr.nombre)+'</h3><span class="est-badge '+e+'"><i></i>'+TXT[e]+'</span></header><ul>'+(gr.servicios||[]).map(svc).join('')+'</ul></section>'};
+    });
+    // Se prueban todos los repartos (la primera tarjeta fija a la izquierda) y
+    // se queda el que deja las dos columnas más parejas.
+    var mejor=null,total=gs.reduce(function(a,g){return a+g.n},0);
+    for(var m=0;m<(1<<gs.length);m+=2){
+      var izq=0;gs.forEach(function(g,i){if(!(m&(1<<i)))izq+=g.n});
+      var dif=Math.abs(total-2*izq);
+      if(mejor===null||dif<mejor.dif)mejor={dif:dif,m:m};
+    }
+    var cols=[[],[]];gs.forEach(function(g,i){cols[(mejor.m&(1<<i))?1:0].push(g.html)});
+    grid.innerHTML='<div class="est-col">'+cols[0].join('')+'</div><div class="est-col">'+cols[1].join('')+'</div>';
   }
   function falla(){top.className='est-top desconocido';tit.textContent='No se pudo consultar el estado en este momento.';hora.textContent='';}
   function carga(){

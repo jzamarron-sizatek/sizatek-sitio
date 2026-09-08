@@ -438,6 +438,7 @@ html.has-intro{overflow:hidden}
 .est-top b{display:block;font-family:var(--display);font-weight:500;font-size:clamp(15px,1.6vw,18px);letter-spacing:-.01em}
 .est-top small{display:block;margin-top:4px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--concha-45)}
 .est-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.est-col{display:grid;gap:16px;min-width:0}
 .est-card{background:var(--noche-2);border:1px solid var(--concha-08);border-radius:var(--r);padding:6px 0 4px;min-width:0}
 .est-card header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px 10px;border-bottom:1px solid var(--concha-08)}
 .est-card h3{margin:0;font-family:var(--display);font-weight:500;font-size:15px;letter-spacing:-.01em}
