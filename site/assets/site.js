@@ -16,6 +16,9 @@
   segs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.seg)})});
   document.querySelectorAll('.rung summary a').forEach(function(a){a.addEventListener('click',function(e){e.stopPropagation()})});
   document.querySelectorAll('[data-seg-link]').forEach(function(a){a.addEventListener('click',function(){show(a.dataset.segLink)})});
+  // /paquetes/#neg (desde "Internet para Negocios" en Nosotros) abre directo la pestaña Negocio
+  function porHash(){if(location.hash==='#neg')show('neg');else if(location.hash==='#res')show('res');}
+  porHash();window.addEventListener('hashchange',porHash);
 
   // formulario → WhatsApp con los datos capturados (sin texto adicional)
   var fc=document.getElementById('formContacto');
