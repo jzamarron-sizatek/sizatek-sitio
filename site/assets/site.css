@@ -642,3 +642,49 @@ html.has-intro{overflow:hidden}
   .ticker-track .pronto::before{background:var(--maize);box-shadow:0 0 12px var(--maize)}
   .ticker-track .pronto::after{content:" — PRÓXIMAMENTE";font-size:11px;letter-spacing:.1em;opacity:.85}
   .fcol li.pronto{color:var(--maize)}
+
+  /* ───────── pagar ───────── */
+  .pagar{padding:clamp(48px,6vw,84px) 0}
+  .pagar h1{font-family:var(--display);font-size:clamp(30px,4.4vw,50px);line-height:1.08;
+    letter-spacing:-.02em;margin:0}
+  .pasarelas{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .pasarela{background:var(--noche-2);border:1px solid var(--concha-08);border-radius:var(--r);
+    padding:26px 26px 24px}
+  .pasarela h2{font-family:var(--display);font-size:22px;letter-spacing:-.01em;margin:0 0 10px}
+  .pasarela p{color:var(--concha-70);font-size:14.5px;line-height:1.6;margin:0 0 16px}
+  .idform label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--concha-45);margin-bottom:8px}
+  .idform .fila{display:flex;gap:10px;flex-wrap:wrap}
+  .idform input{flex:1 1 160px;min-width:0;background:var(--noche);border:1px solid var(--concha-15);
+    border-radius:999px;padding:13px 20px;color:var(--concha);font:inherit;font-size:16px}
+  .idform input:focus{outline:2px solid var(--luz);outline-offset:2px}
+  .idform .err{margin:10px 0 0;font-size:13px;color:var(--maize)}
+  .pasarela .chico{font-size:12.5px;color:var(--concha-45);margin:14px 0 0;line-height:1.6}
+  .pasarela .chico a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+  .pagar .otras{font-family:var(--display);font-size:clamp(19px,2.2vw,24px);margin:44px 0 16px}
+  .formas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .formas article{background:var(--noche-2);border:1px solid var(--concha-08);
+    border-radius:var(--r);padding:20px 20px 18px}
+  .formas h3{font-family:var(--display);font-size:16px;margin:0 0 8px}
+  .formas p{color:var(--concha-70);font-size:13.5px;line-height:1.6;margin:0 0 6px}
+  .formas .chico{font-size:12px;color:var(--concha-45)}
+  .pagar .legal{display:block;margin-top:28px;font-size:13px;color:var(--concha-45);line-height:1.6}
+  /* El botón de pagar: verde como el de WhatsApp sería confundirlo con
+     "contáctanos"; va en ámbar, que en este sitio sólo se usa para dinero
+     (el sello de instalación) y para lo que pide atención. */
+  .btn-pago{background:var(--maize);color:#1A1400}
+  .btn-pago:hover{box-shadow:0 8px 32px -8px rgba(255,237,102,.55)}
+  .pasarela .fila-sola{margin:0 0 4px}
+  .banco dl{margin:0 0 14px}
+  .banco dl>div{display:grid;gap:3px;margin-bottom:11px}
+  .banco dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--concha-45)}
+  .banco dd{margin:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .banco .dato{font-family:var(--mono);font-size:15px;letter-spacing:.04em;color:var(--concha);
+    user-select:all}
+  .copiar{border:1px solid var(--concha-15);background:transparent;color:var(--concha-70);
+    font:inherit;font-size:11.5px;padding:4px 11px;border-radius:999px;cursor:pointer}
+  .copiar:hover{border-color:var(--teal);color:var(--concha)}
+  .copiar.listo{border-color:var(--luz);color:var(--luz)}
+  .banco .ojo{font-size:12.5px;line-height:1.6;color:var(--concha-70);margin:0}
+  .banco .ojo b{color:var(--concha)}
