@@ -4,21 +4,30 @@
   var body=document.getElementById('wizBody');if(!body)return;
   var back=document.getElementById('wizBack'),prog=document.getElementById('wizProg'),stepEl=document.getElementById('wizStep');
   var WA='https://wa.me/5216567646127';
+  /* Pesos con separador de miles. Los megas NO lo llevan: la marca
+     escribe 2000, no 2,000. */
+  function pesos(n){return '$'+Number(n).toLocaleString('es-MX');}
 
   /* Planes (según flyers y Formatos Simplificados IFT) */
+  /* Planes, cotejados contra el formato simplificado de cada folio.
+     `up` es la SUBIDA inscrita: antes se imprimía la bajada en su lugar y la
+     recomendación decía, por ejemplo, "450 SUBIDA" en un plan de 450/300.
+     `duo:true` marca el que no se recomienda sin preguntar antes por el
+     puerto del equipo (ver la pregunta `puerto`). */
   var PLANES={
     casa:[
-      {n:'BÁSICO',mb:120,p:399,f:2848687,slug:'basico'},
-      {n:'FAMILIAR',mb:200,p:499,f:2848701,slug:'familiar'},
-      {n:'ENTRETENIMIENTO',mb:450,p:599,f:2984627,slug:'entretenimiento'},
-      {n:'GAMER',mb:650,p:799,f:2984630,slug:'gamer'},
-      {n:'ELITE',mb:1000,p:999,f:2984659,slug:'elite'}],
+      {n:'BÁSICO',mb:120,up:120,p:399,f:2848687,slug:'basico'},
+      {n:'FAMILIAR',mb:200,up:200,p:499,f:2848701,slug:'familiar'},
+      {n:'ENTRETENIMIENTO',mb:450,up:300,p:599,f:2984627,slug:'entretenimiento'},
+      {n:'GAMER',mb:650,up:400,p:799,f:2984630,slug:'gamer'},
+      {n:'ELITE',mb:1000,up:500,p:999,f:2984659,slug:'elite'},
+      {n:'DUO',mb:2000,up:500,p:1899,f:2980155,slug:'duo',duo:true,inst:1500}],
     negocio:[
-      {n:'BÁSICO',mb:120,p:449,f:2853268,slug:'basico'},
-      {n:'PRO',mb:200,p:549,f:2853278,slug:'pro'},
-      {n:'PLUS',mb:450,p:649,f:2984684,slug:'plus'},
-      {n:'MAX',mb:650,p:849,f:2984699,slug:'max'},
-      {n:'ELITE',mb:1000,p:1099,f:2984710,slug:'elite'}]
+      {n:'BÁSICO',mb:120,up:120,p:449,f:2853268,slug:'negocios-basico'},
+      {n:'PRO',mb:200,up:200,p:549,f:2853278,slug:'negocios-pro'},
+      {n:'PLUS',mb:450,up:300,p:649,f:2984684,slug:'negocios-plus'},
+      {n:'MAX',mb:650,up:400,p:849,f:2984699,slug:'negocios-max'},
+      {n:'ELITE',mb:1000,up:500,p:1099,f:2984710,slug:'negocios-elite'}]
   };
 
   /* Iconos */
@@ -61,6 +70,15 @@
       {l:'No',v:0},{l:'A veces',v:30},{l:'Seguido',v:70}]},
     videollamadas:{r:'Videollamadas',icon:'call',q:'¿Videollamadas o videoconferencias?',opts:[
       {l:'Casi nunca',v:5},{l:'A diario',v:30},{l:'Varias al mismo tiempo',v:70}]},
+    /* EL DUO NO SE RECOMIENDA A CIEGAS.
+        Con un puerto de 1 Gb el equipo topa en 1000 Mbps aunque el servicio
+        traiga 2000: el cliente pagaría $1,899 y vería lo mismo que con ELITE.
+        Esta pregunta sólo aparece cuando el uso declarado pasa de 1000. */
+    puerto:{r:'Puerto del equipo',icon:'disp',q:'¿Tu equipo tiene puerto de 2.5 Gb?',
+      s:'Lo traen computadoras y NAS recientes, y los switches que lo soportan. Con un puerto de 1 Gb, un solo equipo topa en 1000 Mbps aunque el servicio traiga más.',opts:[
+      {l:'Sí',s:'o lo voy a conectar por WiFi 6 entre varios equipos',puerto:'si'},
+      {l:'No lo sé',s:'pregúntenme al instalar',puerto:'nose'},
+      {l:'No',s:'mi equipo es de 1 Gb',puerto:'no'}]},
     nube:{r:'Nube / punto de venta',icon:'work',q:'¿Sistemas en la nube o punto de venta?',s:'facturación, punto de venta, respaldos, escritorio remoto',opts:[
       {l:'No',v:0},{l:'Sí',v:20},{l:'Sí, varios',v:50}]}
   };
@@ -68,7 +86,41 @@
             negocio:['equipo','dispositivos','pantallas','camaras','iot','videollamadas','nube']};
 
   var ans={},order=['lugar'],idx=0;
-  function flow(){return ans.lugar?['lugar'].concat(FLOW[ans.lugar.k]):['lugar'];}
+  function flow(){
+    if(!ans.lugar)return['lugar'];
+    var f=['lugar'].concat(FLOW[ans.lugar.k]);
+    /* La pregunta del puerto se agrega al final SÓLO cuando ya están
+       contestadas las demás y el cuestionario ya topó la escalera, que es el
+       único caso en que el Duo entra a discusión. Preguntarle por hardware a
+       quien va a terminar en BÁSICO es ruido. */
+    if(ans.lugar.k==='casa' && f.slice(1).every(function(k){return ans[k];}) && topa()) f.push('puerto');
+    return f;
+  }
+
+  /* Mbps estimados de uso simultáneo, ya con el margen. */
+  function necesidad(){
+    var sum=0,tipo=ans.lugar?ans.lugar.k:'casa';
+    (FLOW[tipo]||[]).forEach(function(k){var o=ans[k];if(o)sum+=o.v||0;});
+    return sum*1.6;
+  }
+  /* Mínimo forzado por una respuesta (p. ej. consolas sube a GAMER). */
+  function minimo(){
+    var m=0,tipo=ans.lugar?ans.lugar.k:'casa';
+    (FLOW[tipo]||[]).forEach(function(k){var o=ans[k];if(o&&o.minTier!=null)m=Math.max(m,o.minTier);});
+    return m;
+  }
+  /* Índice sobre la escalera SIN el Duo. */
+  function indiceBase(tipo){
+    var planes=PLANES[tipo].filter(function(x){return !x.duo;}),need=necesidad(),i=0;
+    while(i<planes.length-1&&planes[i].mb<need)i++;
+    return Math.max(i,minimo());
+  }
+  /* ¿El cuestionario ya llegó al último escalón? Ahí es donde tiene sentido
+     preguntar por el puerto: es la única puerta de entrada al Duo. */
+  function topa(){
+    var tipo=ans.lugar.k,planes=PLANES[tipo].filter(function(x){return !x.duo;});
+    return indiceBase(tipo)===planes.length-1;
+  }
 
   function render(){
     order=flow();var total=order.length;
@@ -85,30 +137,53 @@
   function swap(h){body.classList.remove('in');body.innerHTML=h;void body.offsetWidth;body.classList.add('in');var top=wiz.getBoundingClientRect().top;if(top<0)window.scrollTo({top:window.scrollY+top-84,behavior:'smooth'});}
 
   function calc(){
-    var tipo=ans.lugar.k,sum=0,min=0;
-    flow().slice(1).forEach(function(k){var o=ans[k];if(!o)return;sum+=o.v||0;if(o.minTier!=null)min=Math.max(min,o.minTier);});
-    var need=sum*1.6,planes=PLANES[tipo],i=0;
-    while(i<planes.length-1&&planes[i].mb<need)i++;
-    i=Math.max(i,min);
-    return {tipo:tipo,plan:planes[i],alt:i>0?planes[i-1]:null,need:Math.round(need)};
+    var tipo=ans.lugar.k,planes=PLANES[tipo],base=PLANES[tipo].filter(function(x){return !x.duo;});
+    var i=indiceBase(tipo),puerto=ans.puerto?ans.puerto.puerto:null,subido=null;
+    var plan=base[i];
+    /* El Duo sólo se recomienda si el cliente dijo que su equipo lo aprovecha.
+       Si dijo que no, se queda en ELITE y el resultado explica por qué:
+       cobrarle $1,899 para que vea 1000 Mbps no es vender, es prepararle una
+       queja. Si dijo que no sabe, se le ofrece con la advertencia. */
+    if(i===base.length-1 && (puerto==='si'||puerto==='nose')){
+      var duo=planes.filter(function(x){return x.duo;})[0];
+      if(duo){ subido=plan; plan=duo; }
+    }
+    var alt = subido ? subido : (i>0?base[i-1]:null);
+    return {tipo:tipo,plan:plan,alt:alt,need:Math.round(necesidad()),
+            puerto:puerto,bajado:(i===base.length-1&&puerto==='no')?planes.filter(function(x){return x.duo;})[0]:null};
   }
+
   function resumen(){var parts=[];flow().slice(1).forEach(function(k){var o=ans[k];if(o&&o.v)parts.push(Q[k].r+': '+o.l);});return parts;}
 
   function result(){
     var r=calc(),p=r.plan,tipo=r.tipo==='casa'?'RESIDENCIAL':'NEGOCIO';
     back.hidden=false;prog.style.width='100%';stepEl.textContent='';
-    var msg='Hola, calculé mi paquete en sizatek.com: '+p.n+' '+tipo+' ('+p.mb+' megas, $'+p.p+'/mes). Quiero agendar mi instalación.\n'+resumen().join(' · ');
+    var inst=p.inst||600;
+    var msg='Hola, calculé mi paquete en sizatek.com: '+p.n+' '+tipo+' ('+p.mb+' megas, recarga '+pesos(p.p)+', vigencia 30 días). Quiero agendar mi instalación.\n'+resumen().join(' · ');
     var wa=WA+'?text='+encodeURIComponent(msg);
     var pdf='https://sizatek.com/wp-content/uploads/2026/09/formato-simplificado-'+p.f+'-'+p.slug+'.pdf';
+
+    /* Un aviso, no una letra chiquita: si el cliente dijo que su equipo es de
+       1 Gb, tiene derecho a saber por qué no le estamos ofreciendo el Duo. */
+    var aviso='';
+    if(r.bajado){
+      aviso='<p class="wiz-aviso">Por lo que nos dijiste, el Duo 2000 no te rendiría: '+
+        'con un puerto de 1 Gb un solo equipo topa en 1000 Mbps aunque el servicio traiga más. '+
+        'Si cambias de equipo o lo vas a repartir por WiFi 6 entre varios, dinos y lo vemos.</p>';
+    } else if(p.duo && r.puerto==='nose'){
+      aviso='<p class="wiz-aviso">Al instalar revisamos el puerto de tu equipo. Si resulta de '+
+        '1 Gb, un solo equipo topa en 1000 Mbps: te lo decimos antes de contratar.</p>';
+    }
+
     var h='<div class="wiz-res"><p class="eyebrow">Paquete sugerido</p>'+
-      '<div class="rung open"><div class="wiz-plan">'+
+      '<div class="rung open'+(p.duo?' es-duo':'')+'"><div class="wiz-plan">'+
       '<div class="name">'+p.n+'<small>'+tipo+' · Folio de inscripción '+p.f+'</small></div>'+
-      '<div class="bar-wrap"><div class="bar"><i style="--w:'+Math.max(12,p.mb/10)+'%"></i><span class="mb">'+p.mb+'<small>MEGAS</small></span></div><div class="up"><b>'+p.mb+'</b> SUBIDA<span class="v6">IPv4 + IPv6</span></div></div>'+
-      '<div class="price"><div class="amt">$'+p.p+'<small>/MES</small></div><a class="btn btn-luz" href="'+wa+'">AGENDAR MI INSTALACIÓN</a></div>'+
-      '</div></div>'+
+      '<div class="bar-wrap"><div class="bar"><i style="--w:'+Math.max(12,p.mb/20)+'%"></i><span class="mb">'+p.mb+'<small>MEGAS</small></span></div><div class="up"><b>'+p.up+'</b> SUBIDA<span class="v6">IPv4 + IPv6</span></div></div>'+
+      '<div class="price"><div class="amt">'+pesos(p.p)+'<small>recarga</small></div><div class="vig">vigencia del saldo 30 días · instalación '+pesos(inst)+'</div><a class="btn btn-luz" href="'+wa+'">AGENDAR MI INSTALACIÓN</a></div>'+
+      '</div></div>'+aviso+
       '<div class="wiz-sum">'+resumen().map(function(s){return '<span>'+s+'</span>';}).join('')+'</div>'+
-      '<div class="wiz-links"><a class="btn btn-ghost" href="/paquetes/#plan-'+p.f+'">Paquetes</a><a class="btn btn-ghost" href="'+pdf+'">Folio de inscripción '+p.f+'</a>'+(r.alt?'<a class="btn btn-ghost" href="/paquetes/#plan-'+r.alt.f+'">'+r.alt.n+' · '+r.alt.mb+' MEGAS · $'+r.alt.p+'/MES</a>':'')+'</div>'+
-      '<p class="legal">*Válido a partir del 1 de septiembre de 2026. Aplican restricciones. Sujeto a cobertura.</p>'+
+      '<div class="wiz-links"><a class="btn btn-ghost" href="/paquetes/#plan-'+p.f+'">Paquetes</a><a class="btn btn-ghost" href="'+pdf+'">Folio de inscripción '+p.f+'</a>'+(r.alt?'<a class="btn btn-ghost" href="/paquetes/#plan-'+r.alt.f+'">'+r.alt.n+' · '+r.alt.mb+' MEGAS · $'+r.alt.p+' recarga</a>':'')+'</div>'+
+      '<p class="legal">Acceso a Internet Fijo Prepago. Vigencia del saldo: 30 días. Velocidad mínima garantizada: 10% de la velocidad contratada, de bajada y de subida. Sin plazo mínimo de permanencia. Un equipo terminal incluido, en comodato. IVA incluido. Sujeto a cobertura y factibilidad técnica. Esta sugerencia es orientativa; la contratación va por el folio inscrito ante el IFT.</p>'+
       '<button type="button" class="wiz-again" id="wizAgain">&#8635; Empezar de nuevo</button></div>';
     swap(h);
     document.getElementById('wizAgain').addEventListener('click',function(){ans={};idx=0;render();});

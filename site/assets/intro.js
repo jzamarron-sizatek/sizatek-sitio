@@ -15,7 +15,7 @@
   resize(); window.addEventListener('resize',resize);
 
   /* ---- tiempos (s) ---- */
-  var T={grid:0.0,core:0.25,burst:0.7,streak0:1.0,streak1:2.45,ring:2.35,iso:1.75,word:2.55,tag:3.15,sweep:3.2,out:4.75,end:5.6};
+  var T={grid:0.0,core:0.25,burst:0.7,streak0:1.0,streak1:2.45,ring:2.35,iso:1.75,word:2.55,tag:3.15,sweep:3.2,duo:3.75,out:5.5,end:6.35};
   var DUR=T.end;
 
   /* ---- RNG determinista ---- */
@@ -100,7 +100,7 @@
   }
 
   /* ---- fases CSS ---- */
-  var phases=[['iso',T.iso],['word',T.word],['tag',T.tag],['out',T.out]];
+  var phases=[['iso',T.iso],['word',T.word],['tag',T.tag],['duo',T.duo],['out',T.out]];
   function applyPhases(t){for(var i=0;i<phases.length;i++){el.classList.toggle('p-'+phases[i][0],t>=phases[i][1]);}}
 
   function finish(){try{sessionStorage.setItem('sz-intro','1');}catch(e){}document.documentElement.classList.remove('has-intro');if(el.parentNode)el.parentNode.removeChild(el);window.removeEventListener('resize',resize);}
@@ -108,7 +108,7 @@
   if(RENDER){
     /* modo exportación: renderizado determinista por tiempo (t en segundos) */
     el.classList.add('go','render');
-    var seenAnims=[],t0map={'intro-iso':T.iso,'intro-word':T.word,'intro-bar':T.word,'intro-tag':T.tag,'intro-out':T.out,'intro-zoom':T.out};
+    var seenAnims=[],t0map={'intro-iso':T.iso,'intro-word':T.word,'intro-bar':T.word,'intro-tag':T.tag,'intro-duo':T.duo,'intro-duo-linea':T.duo,'intro-duo-cuna':T.duo,'intro-out':T.out,'intro-zoom':T.out};
     window.__intro={duration:DUR,seek:function(t){draw(t);applyPhases(t);var anims=document.getAnimations?document.getAnimations():[];for(var i=0;i<anims.length;i++){var a=anims[i];if(seenAnims.indexOf(a)<0){seenAnims.push(a);a.pause();a.__t0=(t0map[a.animationName]||0)*1000;}a.currentTime=Math.max(0,t*1000-a.__t0);}}};
     draw(0);
     return;

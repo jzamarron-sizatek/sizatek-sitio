@@ -28,8 +28,8 @@
     window.open('https://wa.me/5216567646127?text='+encodeURIComponent(parts.join('\n')),'_blank');
   });
 
-  // hero: luz viajando por hilos de fibra (Canvas)
-  var cv=document.getElementById('fibra');
+  // hero: la luz viajando, de fondo (Canvas)
+  var cv=document.getElementById("luz");
   if(cv){
   var ctx=cv.getContext('2d'),W,H,strands=[],pulses=[];
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -118,4 +118,70 @@
     s.onend=function(){running=false;btn.disabled=false;btn.textContent='Prueba tu Velocidad'};
     btn.addEventListener('click',function(){if(running){s.abort();return}running=true;btn.disabled=true;btn.textContent='…';dl.textContent=ul.textContent=pg.textContent=jt.textContent='0.00';arc(dlbar,0);arc(ulbar,0);s.start()});
   })();
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LA ANIMACIÓN DEL DUO (3-oct-2026)
+
+   Tres piezas que arrancan juntas cuando el hero entra en pantalla:
+     · las tres cuñas se lanzan hacia adelante y frenan en su lugar;
+     · la cifra cuenta de 0 a 2000;
+     · la barra del medidor se llena.
+
+   POR QUÉ LA CIFRA ESTÁ ESCRITA EN EL HTML Y NO LA PONE ESTE ARCHIVO:
+   si el JavaScript no corre —o el navegador lo bloquea— la portada tiene
+   que seguir diciendo 2000. Un precio o una velocidad que dependen de un
+   script son un precio y una velocidad que un día no se publican. Aquí sólo
+   se anima lo que ya está escrito.
+
+   Y si el visitante pidió menos movimiento en su sistema, no se anima nada:
+   se deja todo en su estado final. ══════════════════════════════════════ */
+(function () {
+  var hero = document.querySelector('.hero-duo');
+  if (!hero) return;
+
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var medidor = hero.querySelector('.medidor');
+  var cifras = [].slice.call(hero.querySelectorAll('[data-cuenta]'));
+
+  function final() {
+    cifras.forEach(function (el) {
+      el.textContent = String(el.dataset.cuenta);
+    });
+    if (medidor) medidor.classList.add('listo');
+    hero.classList.add('duo-listo');
+  }
+
+  if (quieto) { final(); return; }
+
+  function contar(el) {
+    var meta = Number(el.dataset.cuenta), t0 = null, dur = 1500;
+    function paso(t) {
+      if (t0 === null) t0 = t;
+      var k = Math.min(1, (t - t0) / dur);
+      // Desacelera al final: se siente como algo que llega, no como un reloj.
+      var e = 1 - Math.pow(1 - k, 3);
+      el.textContent = String(Math.round(meta * e));
+      if (k < 1) requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  }
+
+  var corrida = false;
+  function arrancar() {
+    if (corrida) return;
+    corrida = true;
+    hero.classList.add('duo-listo');
+    cifras.forEach(contar);
+    if (medidor) setTimeout(function () { medidor.classList.add('listo'); }, 180);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var ob = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { arrancar(); ob.disconnect(); } });
+    }, { threshold: .25 });
+    ob.observe(hero);
+  } else {
+    arrancar();
+  }
 })();
