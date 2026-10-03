@@ -10,15 +10,15 @@
     casa:[
       {n:'BÁSICO',mb:120,p:399,f:2848687,slug:'basico'},
       {n:'FAMILIAR',mb:200,p:499,f:2848701,slug:'familiar'},
-      {n:'ENTRETENIMIENTO',mb:450,p:599,f:2870866,slug:'entretenimiento'},
-      {n:'GAMER',mb:650,p:799,f:2848745,slug:'gamer'},
-      {n:'ELITE',mb:1000,p:999,f:2848765,slug:'elite'}],
+      {n:'ENTRETENIMIENTO',mb:450,p:599,f:2984627,slug:'entretenimiento'},
+      {n:'GAMER',mb:650,p:799,f:2984630,slug:'gamer'},
+      {n:'ELITE',mb:1000,p:999,f:2984659,slug:'elite'}],
     negocio:[
       {n:'BÁSICO',mb:120,p:449,f:2853268,slug:'basico'},
       {n:'PRO',mb:200,p:549,f:2853278,slug:'pro'},
-      {n:'PLUS',mb:450,p:649,f:2853290,slug:'plus'},
-      {n:'MAX',mb:650,p:849,f:2853297,slug:'max'},
-      {n:'ELITE',mb:1000,p:1099,f:2853299,slug:'elite'}]
+      {n:'PLUS',mb:450,p:649,f:2984684,slug:'plus'},
+      {n:'MAX',mb:650,p:849,f:2984699,slug:'max'},
+      {n:'ELITE',mb:1000,p:1099,f:2984710,slug:'elite'}]
   };
 
   /* Iconos */
