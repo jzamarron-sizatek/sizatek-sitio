@@ -650,7 +650,22 @@ html.has-intro{overflow:hidden}
   .pasarelas{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
   .pasarela{background:var(--noche-2);border:1px solid var(--concha-08);border-radius:var(--r);
     padding:26px 26px 24px}
-  .pasarela h2{font-family:var(--display);font-size:22px;letter-spacing:-.01em;margin:0 0 10px}
+  /* min-height para que las dos tarjetas arranquen parejas: una trae el logo
+     dentro de una pastilla y la otra sólo el nombre en texto, y sin esto el
+     párrafo de cada una empezaba a distinta altura. */
+  .pasarela h2{font-family:var(--display);font-size:22px;letter-spacing:-.01em;margin:0 0 10px;
+    display:flex;align-items:center;min-height:42px}
+  /* La pastilla clara existe porque el logo de la pasarela es tinta oscura y
+     va sin modificar. Sobre la tarjeta oscura se vería el recorte del archivo
+     original; sobre el blanco cálido del sitio queda limpio y además se lee
+     como "marca de un tercero" y no como título nuestro. */
+  .pasarela h2.marca{min-height:0}
+  .pasarela h2.marca span{display:inline-flex;background:var(--concha);border-radius:999px;
+    padding:10px 20px;line-height:0}
+  /* 30px y no 24: al lado de "Pagoralia" en 22px de Unbounded, un logo de 24
+     se veía como el hermano chico. La altura se mide por lo que PESA en la
+     tarjeta, no por el número. */
+  .pasarela h2.marca img{display:block;height:30px;width:auto}
   .pasarela p{color:var(--concha-70);font-size:14.5px;line-height:1.6;margin:0 0 16px}
   .idform label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--concha-45);margin-bottom:8px}
