@@ -632,3 +632,13 @@ html.has-intro{overflow:hidden}
   .wiz-res .rung.es-duo{border-color:rgba(27,231,255,.6);
     background:linear-gradient(165deg,rgba(27,231,255,.12),var(--noche-2) 60%)}
   .wiz-res .legal{display:block;margin-top:16px;font-size:11.5px;line-height:1.6}
+
+  /* ── Janos y Ascensión ──────────────────────────────────────────────────
+     NO son cobertura: la planta está en construcción y ahí no van el Duo ni
+     los planes de aquí. Van en ámbar y con "próximamente" a propósito, para
+     que nadie los lea como zona disponible. El día que abran, los paquetes
+     serán otros y hay que publicarlos ANTES de contratar a nadie. */
+  .ticker-track .pronto{color:var(--maize)}
+  .ticker-track .pronto::before{background:var(--maize);box-shadow:0 0 12px var(--maize)}
+  .ticker-track .pronto::after{content:" — PRÓXIMAMENTE";font-size:11px;letter-spacing:.1em;opacity:.85}
+  .fcol li.pronto{color:var(--maize)}
