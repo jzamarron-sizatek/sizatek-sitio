@@ -76,7 +76,11 @@
       map.on('click',function(e){place(e.latlng.lat,e.latlng.lng);consulta(e.latlng.lat,e.latlng.lng)});}
     function place(lat,lon){if(!map)return;var ll=[lat,lon];if(!pin){pin=L.marker(ll,{draggable:true,icon:L.divIcon({className:'',html:'<div class="cob-pin"></div>',iconSize:[22,22],iconAnchor:[11,11]})}).addTo(map);pin.on('dragend',function(){var p=pin.getLatLng();consulta(p.lat,p.lng)})}else pin.setLatLng(ll);map.setView(ll,Math.max(map.getZoom(),16))}
     function show(ok){res.hidden=false;res.className='cob-res '+(ok?'ok':'no');
-      res.innerHTML=ok?'<div class="k"><i></i>Cobertura</div><p class="z">Nuevo Casas Grandes y Casas Grandes, Chihuahua.</p><a class="btn btn-wa" href="'+WA+'">'+ico+'AGENDAR MI INSTALACIÓN</a>'
+      /* El verificador dice que el punto cae dentro de la zona publicada, no
+         que la caja de enfrente tenga puerto libre. Por eso el resultado
+         promete una revisión y no una instalación: prometer cobertura y
+         después no poder instalar es la queja más cara que hay. */
+      res.innerHTML=ok?'<div class="k"><i></i>Sí hay cobertura</div><p class="z">Es necesaria la validación de un agente.</p><a class="btn btn-wa" href="'+WA+'">'+ico+'AGENDAR MI INSTALACIÓN</a>'
                       :'<div class="k"><i></i>Sujeto a cobertura.</div><a class="btn btn-wa" href="'+WA+'">'+ico+'Contáctanos</a>';}
     function consulta(lat,lon){res.hidden=false;res.className='cob-res';res.innerHTML='<div class="k"><i></i>…</div>';note.textContent='';
       var c=new AbortController(),t=setTimeout(function(){c.abort()},8000);
