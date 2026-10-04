@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Geologica:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="">
 <link rel="stylesheet" href="/assets/site.css?v=15">
-<link rel="stylesheet" href="/assets/portada-2026.css?v=2">
+<link rel="stylesheet" href="/assets/portada-2026.css?v=3">
 <script>(function(){try{if(sessionStorage.getItem('sz-intro')!=='1'&&!(matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))document.documentElement.classList.add('has-intro');}catch(e){}})();</script>
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -199,16 +199,25 @@
   </div>
 </section>
 <!-- ─────────────── SERVICIOS ─────────────── -->
-<section id="servicios">
+<!-- ─────────────── USOS: SIMULADOR ───────────────
+     Eliges tu uso y ves cuánto tarda una tarea real con el paquete sugerido
+     contra el Básico. Las cuentas salen de las velocidades inscritas ante el
+     IFT (bajada/subida de cada folio): tiempo = GB × 8000 / Mbps. El HTML ya trae los
+     tiempos de la primera tarea calculados; usos.js cambia de uso y de tarea
+     y anima la carrera. -->
+<section id="servicios" class="lab">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Servicios</p>
-      <h2>Un paquete para cada uso</h2>
+      <p class="eyebrow">Para qué lo usas</p>
+      <h2>Elige tu uso. Mira la diferencia.</h2>
     </div>
-    <div class="usos">
-      <article class="uso" style="--g:linear-gradient(160deg,rgba(21,87,176,.55),rgba(10,21,48,.2))">
-        <svg class="glyph" viewBox="0 0 48 48" fill="none" stroke="#1BE7FF" stroke-width="2" aria-hidden="true"><rect x="6" y="16" width="36" height="20" rx="8"/><circle cx="32" cy="24" r="2" fill="#1BE7FF"/><circle cx="37" cy="28" r="2" fill="#1BE7FF"/><path d="M14 22v8M10 26h8"/></svg>
-        <svg class="art gamer" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+    <div class="lab-tabs" role="tablist" aria-label="Usos">
+      <button type="button" role="tab" id="lab-tab-gamer" aria-controls="lab-gamer" aria-selected="true" tabindex="0"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12a4 4 0 0 1 4 4v1a4 4 0 0 1-7 2.6l-1-1.1h-4l-1 1.1A4 4 0 0 1 2 13v-1a4 4 0 0 1 4-4z"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16.5" cy="11.5" r=".8"/><circle cx="18.5" cy="13.5" r=".8"/></svg><span>Gamers</span></button><button type="button" role="tab" id="lab-tab-home" aria-controls="lab-home" aria-selected="false" tabindex="-1"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-2.5v9L16 14"/></svg><span>Home office</span></button><button type="button" role="tab" id="lab-tab-neg" aria-controls="lab-neg" aria-selected="false" tabindex="-1"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-1.5 4H4.5z"/><path d="M5 13v7h14v-7"/><path d="M9 20v-4h6v4"/><path d="M4 9l2-5h12l2 5"/></svg><span>Negocio</span></button><button type="button" role="tab" id="lab-tab-crea" aria-controls="lab-crea" aria-selected="false" tabindex="-1"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M7.5 7.5a6.4 6.4 0 0 0 0 9M16.5 7.5a6.4 6.4 0 0 1 0 9"/><path d="M4.5 4.5a10.6 10.6 0 0 0 0 15M19.5 4.5a10.6 10.6 0 0 1 0 15"/></svg><span>Streaming</span></button>
+    </div>
+    <div class="lab-panels">
+      <div class="lab-panel" role="tabpanel" id="lab-gamer" aria-labelledby="lab-tab-gamer" data-plan='{"n": "Gamer", "d": 650, "u": 400}' data-ref='{"n": "Básico", "d": 120, "u": 120}'>
+        <div class="lab-perfil">
+          <svg class="lab-art" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
 <defs><filter id="g-gamer" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <linearGradient id="s-gamer" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1BE7FF" stop-opacity=".35"/><stop offset="1" stop-color="#1557B0" stop-opacity=".15"/></linearGradient></defs>
 
@@ -234,14 +243,32 @@
   <path d="M20 90h34M12 104h26M28 118h30" /><path d="M350 96h34M362 110h26M344 124h30"/>
 </g>
 </svg>
-        <h3>Gamers</h3>
-        <p class="mk-uso-d">Juega en línea y descarga tus juegos.</p>
-        <span class="mk-sug">Sugerido: <b>Gamer · 650 Mbps</b></span>
-        <a class="btn btn-ghost" href="/paquetes/#res">Ver paquete</a>
-      </article>
-      <article class="uso" style="--g:linear-gradient(160deg,rgba(79,179,181,.45),rgba(10,21,48,.2))">
-        <svg class="glyph" viewBox="0 0 48 48" fill="none" stroke="#1BE7FF" stroke-width="2" aria-hidden="true"><rect x="8" y="10" width="32" height="22" rx="3"/><path d="M4 38h40M20 32v6M28 32v6"/></svg>
-        <svg class="art home" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+          <h3>Para jugar en línea</h3>
+          <p>Descargas rápidas para tus juegos y subida para compartir tus partidas.</p>
+          <div class="lab-plan">
+            <span class="lab-et">Paquete sugerido</span>
+            <div class="lab-plan-n">GAMER</div>
+            <div class="lab-plan-v"><b>650</b><span>Mbps bajada</span><b>400</b><span>Mbps subida</span></div>
+            <div class="lab-plan-p">$799 <span>mensualidad · Folio IFT 2984630</span></div>
+            <div class="lab-plan-cta"><a class="btn btn-wa" href="https://wa.me/5216567646127?text=Hola,%20me%20interesa%20el%20paquete%20Gamer%20de%20650%20Mbps">Lo quiero</a><a class="btn btn-ghost" href="/paquetes/#res">Ver detalle</a></div>
+            
+          </div>
+        </div>
+        <div class="lab-sim">
+          <div class="lab-sim-top"><span class="lab-et">Simulador · ¿cuánto tarda?</span><button type="button" class="lab-replay" aria-label="Correr otra vez"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v6h6"/><path d="M20 12a8 8 0 1 1-2.3-5.7L20 9"/></svg></button></div>
+          <div class="lab-chips" role="group" aria-label="Tarea"><button type="button" class="lab-chip" data-gb="100" data-dir="d" data-cosa="juego" aria-pressed="true">Juego nuevo <small>· 100 GB · bajada</small></button><button type="button" class="lab-chip" data-gb="20" data-dir="d" data-cosa="actualización" aria-pressed="false">Actualización <small>· 20 GB · bajada</small></button><button type="button" class="lab-chip" data-gb="8" data-dir="u" data-cosa="partida grabada" aria-pressed="false">Subir partida grabada <small>· 8 GB · subida</small></button></div>
+          <div class="lab-carrera" aria-live="polite">
+            <div class="lab-carril lab-a"><div class="lab-carril-top"><span>Gamer · <b class="lab-v">650</b> Mbps</span><span class="lab-t">20 min</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+            <div class="lab-carril lab-b"><div class="lab-carril-top"><span>Básico · <b class="lab-v">120</b> Mbps</span><span class="lab-t">1 h 51 min</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+          </div>
+          <p class="lab-res"><b class="lab-x">5.4×</b> <span class="lab-res-tx">más rápido que el Básico</span></p>
+          <p class="lab-cabe">En lo que el Básico baja 1 juego, el Gamer baja <b>5</b>.</p>
+          <p class="lab-nota">Tiempos teóricos a la velocidad contratada, conectado por cable. En la práctica cambian según tu equipo, el wifi y el servidor de donde descargas.</p>
+        </div>
+      </div>
+      <div class="lab-panel" role="tabpanel" id="lab-home" aria-labelledby="lab-tab-home" data-plan='{"n": "Entretenimiento", "d": 450, "u": 300}' data-ref='{"n": "Básico", "d": 120, "u": 120}' hidden>
+        <div class="lab-perfil">
+          <svg class="lab-art" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
 <defs><filter id="g-home" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <linearGradient id="s-home" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1BE7FF" stop-opacity=".35"/><stop offset="1" stop-color="#1557B0" stop-opacity=".15"/></linearGradient></defs>
 
@@ -266,14 +293,32 @@
   <path d="M312 40a30 30 0 0 1 42 0M320 50a18 18 0 0 1 26 0"/><circle cx="333" cy="60" r="2.5" fill="#1BE7FF"/>
 </g>
 </svg>
-        <h3>Home office</h3>
-        <p class="mk-uso-d">Videollamadas y trabajo en la nube.</p>
-        <span class="mk-sug">Sugerido: <b>Entretenimiento · 450 Mbps</b></span>
-        <a class="btn btn-ghost" href="/paquetes/#res">Ver paquete</a>
-      </article>
-      <article class="uso" style="--g:linear-gradient(160deg,rgba(15,76,154,.65),rgba(10,21,48,.2))">
-        <svg class="glyph" viewBox="0 0 48 48" fill="none" stroke="#1BE7FF" stroke-width="2" aria-hidden="true"><path d="M8 42V18l16-10 16 10v24"/><path d="M20 42V30h8v12M8 42h32"/></svg>
-        <svg class="art neg" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+          <h3>Para trabajar desde casa</h3>
+          <p>Videollamadas y respaldos a la nube, con subida de 300 Mbps.</p>
+          <div class="lab-plan">
+            <span class="lab-et">Paquete sugerido</span>
+            <div class="lab-plan-n">ENTRETENIMIENTO</div>
+            <div class="lab-plan-v"><b>450</b><span>Mbps bajada</span><b>300</b><span>Mbps subida</span></div>
+            <div class="lab-plan-p">$599 <span>mensualidad · Folio IFT 2984627</span></div>
+            <div class="lab-plan-cta"><a class="btn btn-wa" href="https://wa.me/5216567646127?text=Hola,%20me%20interesa%20el%20paquete%20Entretenimiento%20de%20450%20Mbps">Lo quiero</a><a class="btn btn-ghost" href="/paquetes/#res">Ver detalle</a></div>
+            
+          </div>
+        </div>
+        <div class="lab-sim">
+          <div class="lab-sim-top"><span class="lab-et">Simulador · ¿cuánto tarda?</span><button type="button" class="lab-replay" aria-label="Correr otra vez"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v6h6"/><path d="M20 12a8 8 0 1 1-2.3-5.7L20 9"/></svg></button></div>
+          <div class="lab-chips" role="group" aria-label="Tarea"><button type="button" class="lab-chip" data-gb="10" data-dir="u" data-cosa="respaldo" aria-pressed="true">Respaldo a la nube <small>· 10 GB · subida</small></button><button type="button" class="lab-chip" data-gb="2" data-dir="u" data-cosa="proyecto" aria-pressed="false">Proyecto compartido <small>· 2 GB · subida</small></button><button type="button" class="lab-chip" data-gb="5" data-dir="d" data-cosa="carpeta de archivos" aria-pressed="false">Archivos del trabajo <small>· 5 GB · bajada</small></button></div>
+          <div class="lab-carrera" aria-live="polite">
+            <div class="lab-carril lab-a"><div class="lab-carril-top"><span>Entretenimiento · <b class="lab-v">300</b> Mbps</span><span class="lab-t">4 min 27 s</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+            <div class="lab-carril lab-b"><div class="lab-carril-top"><span>Básico · <b class="lab-v">120</b> Mbps</span><span class="lab-t">11 min</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+          </div>
+          <p class="lab-res"><b class="lab-x">2.5×</b> <span class="lab-res-tx">más rápido que el Básico</span></p>
+          <p class="lab-cabe">En lo que el Básico sube 1 respaldo, el Entretenimiento sube <b>2</b>.</p>
+          <p class="lab-nota">Tiempos teóricos a la velocidad contratada, conectado por cable. En la práctica cambian según tu equipo, el wifi y el servidor de donde descargas.</p>
+        </div>
+      </div>
+      <div class="lab-panel" role="tabpanel" id="lab-neg" aria-labelledby="lab-tab-neg" data-plan='{"n": "Plus", "d": 450, "u": 300}' data-ref='{"n": "Negocio Básico", "d": 120, "u": 120}' hidden>
+        <div class="lab-perfil">
+          <svg class="lab-art" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
 <defs><filter id="g-neg" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <linearGradient id="s-neg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1BE7FF" stop-opacity=".35"/><stop offset="1" stop-color="#1557B0" stop-opacity=".15"/></linearGradient></defs>
 
@@ -295,14 +340,32 @@
   <path d="M136 14a20 20 0 0 1 28 0" opacity=".8"/>
 </g>
 </svg>
-        <h3>Negocios</h3>
-        <p class="mk-uso-d">Paquetes para tu local u oficina.</p>
-        <span class="mk-sug">Sugerido: <b>Plus · 450 Mbps</b></span>
-        <a class="btn btn-ghost" href="/paquetes/#neg">Ver paquete</a>
-      </article>
-      <article class="uso" style="--g:linear-gradient(160deg,rgba(27,231,255,.25),rgba(10,21,48,.2))">
-        <svg class="glyph" viewBox="0 0 48 48" fill="none" stroke="#1BE7FF" stroke-width="2" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M20 17l10 7-10 7z" fill="#1BE7FF"/></svg>
-        <svg class="art crea" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+          <h3>Para tu local u oficina</h3>
+          <p>Computadoras, terminal de cobro y cámaras conectadas a la vez.</p>
+          <div class="lab-plan">
+            <span class="lab-et">Paquete sugerido</span>
+            <div class="lab-plan-n">PLUS</div>
+            <div class="lab-plan-v"><b>450</b><span>Mbps bajada</span><b>300</b><span>Mbps subida</span></div>
+            <div class="lab-plan-p">$649 <span>mensualidad · Folio IFT 2984684</span></div>
+            <div class="lab-plan-cta"><a class="btn btn-wa" href="https://wa.me/5216567646127?text=Hola,%20me%20interesa%20el%20paquete%20Plus%20de%20450%20Mbps">Lo quiero</a><a class="btn btn-ghost" href="/paquetes/#neg">Ver detalle</a></div>
+            
+          </div>
+        </div>
+        <div class="lab-sim">
+          <div class="lab-sim-top"><span class="lab-et">Simulador · ¿cuánto tarda?</span><button type="button" class="lab-replay" aria-label="Correr otra vez"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v6h6"/><path d="M20 12a8 8 0 1 1-2.3-5.7L20 9"/></svg></button></div>
+          <div class="lab-chips" role="group" aria-label="Tarea"><button type="button" class="lab-chip" data-gb="30" data-dir="d" data-cosa="actualización de 5 computadoras" aria-pressed="true">Actualizar 5 computadoras <small>· 30 GB · bajada</small></button><button type="button" class="lab-chip" data-gb="15" data-dir="u" data-cosa="respaldo" aria-pressed="false">Respaldo del sistema <small>· 15 GB · subida</small></button><button type="button" class="lab-chip" data-gb="6" data-dir="u" data-cosa="día de video de cámaras" aria-pressed="false">Video de cámaras del día <small>· 6 GB · subida</small></button></div>
+          <div class="lab-carrera" aria-live="polite">
+            <div class="lab-carril lab-a"><div class="lab-carril-top"><span>Plus · <b class="lab-v">450</b> Mbps</span><span class="lab-t">8 min 53 s</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+            <div class="lab-carril lab-b"><div class="lab-carril-top"><span>Negocio Básico · <b class="lab-v">120</b> Mbps</span><span class="lab-t">33 min</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+          </div>
+          <p class="lab-res"><b class="lab-x">3.7×</b> <span class="lab-res-tx">más rápido que el Negocio Básico</span></p>
+          <p class="lab-cabe">En lo que el Negocio Básico baja 1 actualización de 5 computadoras, el Plus baja <b>3</b>.</p>
+          <p class="lab-nota">Tiempos teóricos a la velocidad contratada, conectado por cable. En la práctica cambian según tu equipo, el wifi y el servidor de donde descargas.</p>
+        </div>
+      </div>
+      <div class="lab-panel" role="tabpanel" id="lab-crea" aria-labelledby="lab-tab-crea" data-plan='{"n": "Duo", "d": 2000, "u": 500}' data-ref='{"n": "Básico", "d": 120, "u": 120}' hidden>
+        <div class="lab-perfil">
+          <svg class="lab-art" viewBox="0 0 400 260" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
 <defs><filter id="g-crea" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <linearGradient id="s-crea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1BE7FF" stop-opacity=".35"/><stop offset="1" stop-color="#1557B0" stop-opacity=".15"/></linearGradient></defs>
 
@@ -326,11 +389,29 @@
 </g>
 <g filter="url(#g-crea)"><circle cx="352" cy="90" r="9" fill="#FF4D6D" opacity=".9"/><circle cx="352" cy="90" r="16" stroke="#FF4D6D" stroke-width="1.5" opacity=".5"/></g>
 </svg>
-        <h3>Creadores y streaming</h3>
-        <p class="mk-uso-d">Transmite en vivo y sube tus videos.</p>
-        <span class="mk-sug">Sugerido: <b>Duo · 2000 Mbps</b></span>
-        <a class="btn btn-ghost" href="/paquetes/#res">Ver paquete</a>
-      </article>
+          <h3>Para crear y transmitir</h3>
+          <p>Sube tus videos en 4K y transmite en vivo.</p>
+          <div class="lab-plan">
+            <span class="lab-et">Paquete sugerido</span>
+            <div class="lab-plan-n">DUO</div>
+            <div class="lab-plan-v"><b>2000</b><span>Mbps bajada</span><b>500</b><span>Mbps subida</span></div>
+            <div class="lab-plan-p">$1,899 <span>mensualidad · Folio IFT 2980155</span></div>
+            <div class="lab-plan-cta"><a class="btn btn-wa" href="https://wa.me/5216567646127?text=Hola,%20me%20interesa%20el%20paquete%20Duo%20de%202000%20Mbps">Lo quiero</a><a class="btn btn-ghost" href="/paquetes/#res">Ver detalle</a></div>
+            <p class="lab-duo">Para pasar de 1000 Mbps tu equipo necesita puerto de 2.5&nbsp;Gb o 10&nbsp;Gb.</p>
+          </div>
+        </div>
+        <div class="lab-sim">
+          <div class="lab-sim-top"><span class="lab-et">Simulador · ¿cuánto tarda?</span><button type="button" class="lab-replay" aria-label="Correr otra vez"><svg class="lab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v6h6"/><path d="M20 12a8 8 0 1 1-2.3-5.7L20 9"/></svg></button></div>
+          <div class="lab-chips" role="group" aria-label="Tarea"><button type="button" class="lab-chip" data-gb="20" data-dir="u" data-cosa="video 4K" aria-pressed="true">Video 4K terminado <small>· 20 GB · subida</small></button><button type="button" class="lab-chip" data-gb="50" data-dir="d" data-cosa="carpeta de material" aria-pressed="false">Material en bruto <small>· 50 GB · bajada</small></button><button type="button" class="lab-chip" data-gb="2" data-dir="u" data-cosa="clip" aria-pressed="false">Clip para redes <small>· 2 GB · subida</small></button></div>
+          <div class="lab-carrera" aria-live="polite">
+            <div class="lab-carril lab-a"><div class="lab-carril-top"><span>Duo · <b class="lab-v">500</b> Mbps</span><span class="lab-t">5 min 20 s</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+            <div class="lab-carril lab-b"><div class="lab-carril-top"><span>Básico · <b class="lab-v">120</b> Mbps</span><span class="lab-t">22 min</span></div><div class="lab-pista"><i style="width:100%"></i></div></div>
+          </div>
+          <p class="lab-res"><b class="lab-x">4.2×</b> <span class="lab-res-tx">más rápido que el Básico</span></p>
+          <p class="lab-cabe">En lo que el Básico sube 1 video 4K, el Duo sube <b>4</b>.</p>
+          <p class="lab-nota">Tiempos teóricos a la velocidad contratada, conectado por cable. En la práctica cambian según tu equipo, el wifi y el servidor de donde descargas.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -398,6 +479,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="" defer></script>
 <script src="/assets/cobertura.js?v=1" defer></script>
 <script src="/assets/site.js?v=13" defer></script>
+<script src="/assets/usos.js?v=1" defer></script>
 <script src="/assets/intro.js?v=12" defer></script>
 
 </body>
