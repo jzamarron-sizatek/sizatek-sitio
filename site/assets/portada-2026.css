@@ -75,3 +75,8 @@
 @keyframes mkLed{0%,100%{opacity:1}50%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){.mk-luz,.mk-led{animation:none}.mk-luz{stroke-dasharray:none;opacity:.8}}
 @media (max-width:420px){.mk-comp li{grid-template-columns:14px 1fr}.mk-comp li em{grid-column:2;text-align:left}}
+/* WiFi 6 incluido */
+.mk-wifi6{display:inline-flex;align-items:center;gap:10px;margin:16px 0 0;padding:8px 14px;border-radius:999px;border:1px solid rgba(27,231,255,.35);background:rgba(27,231,255,.08);color:var(--concha);font-size:14px}
+.mk-wifi6 svg{width:20px;height:20px;color:var(--luz);flex:none}
+.mk-wifi6 b{color:var(--luz);font-weight:600}
+.mk-wifi6-planes{display:flex;border-radius:var(--r);margin:16px 0 0;padding:12px 16px;font-size:15px}
