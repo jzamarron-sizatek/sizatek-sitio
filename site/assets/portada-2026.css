@@ -1,0 +1,52 @@
+/* ===== PROPUESTA (mockup) ===== */
+/* Hero: la velocidad manda, el nombre acompaña */
+.duo-mark h1{font-size:clamp(40px,4.6vw,64px)}
+.duo-mark .cunas{transform:scale(1.2)}
+.mk-vel{gap:18px;margin-top:10px;align-items:center}
+.mk-vel b{font-size:clamp(84px,11vw,150px)!important;line-height:.9}
+.mk-vel span{font-size:clamp(16px,1.8vw,22px)!important;line-height:1.15;color:var(--concha-70)}
+/* Precios a la mitad */
+.mk-precio{gap:28px;margin-top:22px;align-items:flex-end}
+.mk-precio .et{font-size:10px}
+.mk-precio .cif{font-size:clamp(18px,1.8vw,22px)!important;font-weight:700}
+.mk-precio .cif i{display:inline!important;font-size:12px!important;margin-left:4px;color:var(--concha-70)}
+.mk-iva{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--concha-45);padding-bottom:3px}
+/* Panel de velocidad honesto */
+.mk-medidor .mk-fila{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px}
+.mk-medidor .mk-fila span{font-size:14px;color:var(--concha-70)}
+.mk-medidor .mk-fila b{font-family:var(--display);font-size:clamp(20px,2.2vw,28px);font-weight:700}
+.mk-medidor .barra{margin-top:8px}
+.mk-medidor .barra i{transition:none}
+.mk-nota{margin:16px 0 0;font-size:13px;color:var(--concha-45)}
+.mk-link{display:inline-block;margin-top:12px;color:var(--luz);font-weight:500;font-size:15px}
+/* Header: un solo botón destacado */
+.mk-pago{background:transparent!important;color:var(--maize)!important;border:1px solid rgba(255,237,102,.45)!important;box-shadow:none!important}
+/* Paquetes: velocidad grande, precio chico */
+.mk-mini .m{font-size:clamp(26px,2.6vw,34px)!important;display:flex;flex-wrap:wrap;align-items:baseline;row-gap:2px}
+.mk-mini .p{font-size:11px!important}
+.mk-mini .p b{font-size:14px!important;font-weight:600!important}
+@media (max-width:640px){.mk-mini a.duo{order:-1}}
+/* Usos con paquete sugerido */
+.mk-uso-d{margin:-6px 0 0;font-size:14px;color:var(--concha-70)}
+.mk-sug{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--concha-45)}
+.mk-sug b{color:var(--luz);font-weight:500}
+/* Cobertura */
+.mk-cob-t{margin:0;font-family:var(--display);font-weight:500;font-size:18px}
+.mk-cob-d{margin:0 0 4px;font-size:14px;color:var(--concha-70)}
+.mk-o{display:flex;align-items:center;gap:10px;color:var(--concha-45);font-size:12px}
+.mk-o::before,.mk-o::after{content:"";flex:1;height:1px;background:var(--concha-15)}
+.mk-full{justify-content:center;width:100%}
+.mk-zonas{margin-top:8px;padding-top:14px;border-top:1px solid var(--concha-08)}
+.mk-zonas .et{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--concha-45)}
+.mk-zonas ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;font-size:14px}
+.mk-zonas li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--luz);margin-right:10px;vertical-align:middle}
+.mk-zonas li.pronto{color:var(--maize)}
+.mk-zonas li.pronto::before{background:var(--maize)}
+/* Móvil: header y flotante */
+@media (max-width:420px){.nav .wordmark{max-width:96px}.nav .brand{gap:6px}}
+@media (max-width:640px){.wa-float{width:48px;height:48px;right:14px;bottom:14px}.wa-float svg{width:24px;height:24px}body{padding-bottom:24px}}
+/* Leyenda del mapa de cobertura */
+.mk-ley{background:rgba(5,11,26,.85);color:#FFF7EE;font:400 12px/1.3 'Geologica',sans-serif;padding:6px 10px;border-radius:8px;border:1px solid rgba(255,247,238,.14)}
+.mk-ley i{display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(27,231,255,.3);border:2px solid #1BE7FF;margin-right:8px;vertical-align:-2px}
+
+.mk-medidor .barra i{transition:none}
