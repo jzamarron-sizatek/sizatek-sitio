@@ -73,8 +73,8 @@
     <div class="sec-head">
       <p class="eyebrow">Pagar</p>
       <h1>Paga tu servicio</h1>
-      <p class="note">En línea, con tu número de cliente. El cobro se hace en el
-        sitio de la plataforma; aquí no se piden datos de tarjeta.</p>
+      <p class="note">El cobro se hace en el sitio de la plataforma; aquí no se
+        piden datos de tarjeta ni se consultan adeudos.</p>
     </div>
 
     <div class="pasarelas">
@@ -88,25 +88,38 @@
              "tapipay" igual que antes, cuando era texto. -->
         <h2 class="marca"><span><img src="/assets/tapipay.png" alt="tapipay"
           width="406" height="118" decoding="async"></span></h2>
-        <p>Entra con tu número de cliente y te muestra lo que debes. Paga con
-          tarjeta, transferencia o en efectivo en la red de sucursales y tiendas
-          que maneja la plataforma.</p>
-        <form class="idform" data-base="https://app.tapipay.la/s/sizatek/portal/">
-          <label for="id-tapipay">Tu número de cliente</label>
-          <div class="fila">
-            <input id="id-tapipay" name="id" type="text" inputmode="numeric"
-                   autocomplete="off" placeholder="Ej. 3949" maxlength="12">
-            <button class="btn btn-luz" type="submit">Pagar aquí</button>
-          </div>
-          <p class="err" hidden></p>
-        </form>
-        <!-- La liga de WhatsApp lleva el mensaje ya escrito. Quien no sabe su
-             número tampoco sabe qué pedir ni a quién, y el agente del otro lado
-             recibe la pregunta completa en lugar de un "hola" suelto. -->
-        <p class="chico">¿No sabes tu número? Está en tu recibo y en
-          <a href="https://clientes.sizatek.com/cliente/login">Mi Portal</a>.
-          También puedes <a href="https://wa.me/5216567646127?text=Hola%2C%20quiero%20pagar%20en%20l%C3%ADnea%20y%20no%20s%C3%A9%20mi%20n%C3%BAmero%20de%20cliente.%20%C2%BFMe%20lo%20pueden%20decir%3F">pedirlo
-          por WhatsApp</a>.</p>
+        <p>Paga con tarjeta, transferencia o en efectivo en Alsuper, Waldos y
+          Soriana. Pídela por WhatsApp y te llega tu liga, con lo que debes ya
+          puesto.</p>
+
+        <!-- AQUÍ HABÍA UN CAMPO PARA TECLEAR EL NÚMERO DE CLIENTE. SE QUITÓ, Y
+             LA RAZÓN IMPORTA MÁS QUE EL CÓDIGO.
+
+             El portal de tapipay enseña NOMBRE Y ADEUDO a quien sepa un número
+             de cliente. Con el campo aquí, cualquiera en internet podía probar
+             1, 2, 3… y leer la deuda de los clientes de Sizatek desde la propia
+             página de Sizatek.
+
+             Que el portal de tapipay esté abierto de todos modos no nos
+             absuelve: los datos son responsabilidad de Sizatek, y una forma con
+             nuestra marca es nuestra puerta, no la de ellos.
+
+             WhatsApp en su lugar NO es un rodeo: el bot ya identifica al
+             cliente por el teléfono registrado en MikroWisp y sólo entonces le
+             da saldo y liga —decisión de septiembre, "saldo SOLO al WhatsApp
+             registrado"—. Es el mismo factor que tendrá el código de 6 dígitos,
+             con lo que ya está construido.
+
+             El campo vuelve cuando exista ese código, detrás de él.
+             Ver claude/pago-en-linea-autenticado.md. -->
+        <p class="fila-sola">
+          <a class="btn btn-luz" href="https://wa.me/5216567646127?text=Hola%2C%20quiero%20pagar%20mi%20servicio%20en%20l%C3%ADnea.">Pedir
+            mi liga por WhatsApp</a>
+        </p>
+        <p class="chico">Te identificamos con el teléfono que tienes registrado
+          y te mandamos tu liga de pago. Si cambiaste de número,
+          <a href="https://wa.me/5216567646127?text=Hola%2C%20cambi%C3%A9%20de%20n%C3%BAmero%20y%20quiero%20actualizarlo%20para%20pagar%20en%20l%C3%ADnea.">avísanos
+          por el mismo WhatsApp</a> y una agente lo actualiza.</p>
       </article>
 
       <!-- PAGORALIA. La liga que pasó Jose es la del portal
@@ -174,7 +187,7 @@
       <article>
         <h3>En tiendas</h3>
         <p>En efectivo en <b>Alsuper</b>, <b>Waldos</b> y <b>Soriana</b>.
-          Entra con tu número en tapipay y te da la referencia con la que
+          Pide tu liga por WhatsApp y ahí viene la referencia con la que
           pagas en la caja.</p>
       </article>
     </div>

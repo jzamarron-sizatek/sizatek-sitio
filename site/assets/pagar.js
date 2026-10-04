@@ -1,58 +1,20 @@
-/* Sizatek — /pagar/ : arma la liga del portal de la pasarela con el número de
-   cliente que escribe el visitante.
+/* Sizatek — /pagar/ : copiar la CLABE y la cuenta sin equivocarse.
 
-   LO QUE ESTE ARCHIVO NO HACE, Y ES A PROPÓSITO:
-   no pide, no guarda y no manda datos de tarjeta. Lo único que toca es el
-   número de cliente, y nada más para pegarlo al final de una URL. El cobro
-   ocurre en el sitio de la pasarela.
+   AQUÍ VIVÍA EL ARMADOR DE LIGAS DE PASARELA, y se quitó junto con el campo
+   de "tu número de cliente" de la página. La razón no es técnica:
 
-   POR QUÉ SE VALIDA EL NÚMERO:
-   es texto que escribe un desconocido y termina dentro de una URL. Si se
-   dejara pasar cualquier cosa, alguien podría escribir "../otra-cosa" y mandar
-   al cliente a una página que no es la suya. Por eso sólo se aceptan dígitos
-   y además se escapa con encodeURIComponent. Las dos cosas: la primera para
-   que el usuario sepa que se equivocó, la segunda porque nunca se confía en
-   que la primera esté bien escrita.
+   el portal de tapipay enseña NOMBRE Y ADEUDO a quien sepa un número de
+   cliente. Mientras el campo estuvo aquí, cualquiera podía probar 1, 2, 3… y
+   leer la deuda de los clientes de Sizatek desde la propia página de Sizatek.
+   Que el portal de tapipay esté abierto de todos modos no nos absuelve: los
+   datos son responsabilidad de Sizatek, y una forma con nuestra marca es
+   nuestra puerta.
 
-   Y por qué no se abre en pestaña nueva: el cliente viene a pagar. Mandarlo a
-   otra pestaña deja la de atrás abierta y, cuando regresa, no sabe cuál es la
-   buena. */
-(function () {
-  'use strict';
-
-  var formas = document.querySelectorAll('.pagar .idform');
-  if (!formas.length) return;
-
-  formas.forEach(function (f) {
-    var campo = f.querySelector('input[name=id]');
-    var error = f.querySelector('.err');
-
-    function avisa(texto) {
-      error.textContent = texto;
-      error.hidden = !texto;
-      if (texto) campo.focus();
-    }
-
-    campo.addEventListener('input', function () { avisa(''); });
-
-    f.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var base = f.dataset.base || '';
-      // Sin liga configurada no se manda a nadie a ningún lado.
-      if (!base) { avisa('Esta forma de pago todavía no está disponible.'); return; }
-
-      var id = (campo.value || '').trim();
-      if (!id) { avisa('Escribe tu número de cliente.'); return; }
-      if (!/^[0-9]{1,12}$/.test(id)) {
-        avisa('El número de cliente son sólo dígitos. Lo encuentras en tu recibo.');
-        return;
-      }
-
-      var destino = base.replace(/\/+$/, '') + '/' + encodeURIComponent(id);
-      location.href = destino;
-    });
-  });
-})();
+   Hoy la página manda al bot de WhatsApp, que ya identifica al cliente por su
+   teléfono registrado antes de darle nada. El campo vuelve cuando exista la
+   autenticación por código, detrás de ella — ver
+   claude/pago-en-linea-autenticado.md. El código viejo está en el historial de
+   git; no hace falta dejarlo aquí apagado. */
 
 /* Copiar la CLABE y la cuenta.
 
