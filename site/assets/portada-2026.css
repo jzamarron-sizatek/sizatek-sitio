@@ -50,3 +50,28 @@
 .mk-ley i{display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(27,231,255,.3);border:2px solid #1BE7FF;margin-right:8px;vertical-align:-2px}
 
 .mk-medidor .barra i{transition:none}
+/* Puertos: amarillo = 1 Gb, azul con leyenda = 2.5 Gb. La luz entra por el azul. */
+.mk-25{color:#5AA9FF;font-weight:500}
+.mk-puerto h3{margin:0 0 14px}
+.mk-router{display:block;width:100%;height:auto;margin:0 0 14px}
+.mk-r-tx{font:500 10px var(--mono);letter-spacing:.16em;fill:rgba(255,247,238,.45)}
+.mk-p1 use{fill:#E8B923;stroke:#8A6A00;stroke-width:1.5}
+.mk-p1 text{font:500 11px var(--mono);fill:rgba(255,247,238,.55);text-anchor:middle}
+.mk-p25 use{fill:#2E7BFF;stroke:#9CC7FF;stroke-width:2}
+.mk-p25-tx{font:700 13px var(--display);fill:#5AA9FF}
+.mk-led{fill:#1BE7FF;animation:mkLed 1.2s ease-in-out infinite}
+.mk-cable{fill:none;stroke:#2A3A66;stroke-width:9;stroke-linecap:round}
+.mk-luz{fill:none;stroke:#1BE7FF;stroke-width:4;stroke-linecap:round;stroke-dasharray:26 210;animation:mkLuz 1.6s linear infinite}
+.mk-plug{fill:#C9D6F2}
+.mk-comp{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.mk-comp li{display:grid;grid-template-columns:14px 1fr auto;align-items:center;gap:10px;font-size:14px;color:var(--concha-70)}
+.mk-comp li em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--concha-45);text-align:right}
+.mk-comp li:last-child em{color:#5AA9FF}
+.mk-comp li:last-child span{color:var(--concha)}
+.mk-dot1,.mk-dot25{width:14px;height:14px;border-radius:3px}
+.mk-dot1{background:#E8B923}
+.mk-dot25{background:#2E7BFF;box-shadow:0 0 10px rgba(46,123,255,.7)}
+@keyframes mkLuz{from{stroke-dashoffset:236}to{stroke-dashoffset:0}}
+@keyframes mkLed{0%,100%{opacity:1}50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.mk-luz,.mk-led{animation:none}.mk-luz{stroke-dasharray:none;opacity:.8}}
+@media (max-width:420px){.mk-comp li{grid-template-columns:14px 1fr}.mk-comp li em{grid-column:2;text-align:left}}

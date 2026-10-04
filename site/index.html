@@ -97,7 +97,7 @@
       </div>
       <p class="duo-vel mk-vel"><b>2000</b><span>Mbps<br>de bajada</span></p>
 
-      <p class="lede">Internet por fibra óptica para tu casa o tu negocio. Pensado para videollamadas, juegos en línea y respaldos en la nube.</p>
+      <p class="lede">Internet por fibra óptica para tu casa o tu negocio. Pensado para equipos con puerto de <b class="mk-25">2.5&nbsp;Gb</b> o 10&nbsp;Gb: juegos en línea, transmisiones y respaldos en la nube.</p>
 
       <div class="precio-duo mk-precio">
         <div><span class="et">Mensualidad</span><div class="cif">$1,899</div></div>
@@ -118,9 +118,44 @@
         <div class="barra"><i style="width:100%"></i></div>
         <p class="mk-nota">La medición depende de tu equipo y de la conexión (cable o wifi).</p>
       </div>
-      <div class="panel puerto">
-        <h3>¿Tu equipo tiene puerto de 2.5&nbsp;Gb?</h3>
-        <p>Para medir más de 1000 Mbps necesitas un equipo con puerto de 2.5&nbsp;Gb, conectado por cable. Con un puerto de 1&nbsp;Gb, la medición llega como máximo a 1000 Mbps.</p>
+      <!-- PUERTOS: la parte de atrás de un equipo. Amarillos = 1 Gb, azul con
+           leyenda "2.5G" = 2.5 Gb. La luz entra solo por el azul: es el que
+           deja pasar los 2000 Mbps. Con prefers-reduced-motion se queda quieto. -->
+      <div class="panel puerto mk-puerto">
+        <h3>¿Tu equipo tiene puerto de 2.5&nbsp;Gb o 10&nbsp;Gb?</h3>
+        <svg class="mk-router" viewBox="0 0 520 210" role="img" aria-label="Parte de atrás de un equipo: cuatro puertos amarillos de 1 Gb y un puerto azul de 2.5 Gb con el cable de fibra conectado">
+          <defs>
+            <linearGradient id="mkCuerpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16244A"/><stop offset="1" stop-color="#0C1733"/></linearGradient>
+            <filter id="mkBrillo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <g id="mkRj45"><path d="M0 6h40v26h-9v6h-22v-6h-9z"/></g>
+          </defs>
+          <rect x="10" y="22" width="500" height="96" rx="14" fill="url(#mkCuerpo)" stroke="rgba(255,247,238,.14)"/>
+          <text x="26" y="44" class="mk-r-tx">PARTE DE ATRÁS DE TU EQUIPO</text>
+          <!-- 4 puertos de 1 Gb -->
+          <g class="mk-p1">
+            <g transform="translate(34 58)"><use href="#mkRj45"/><text x="20" y="54">1G</text></g>
+            <g transform="translate(92 58)"><use href="#mkRj45"/><text x="20" y="54">1G</text></g>
+            <g transform="translate(150 58)"><use href="#mkRj45"/><text x="20" y="54">1G</text></g>
+            <g transform="translate(208 58)"><use href="#mkRj45"/><text x="20" y="54">1G</text></g>
+          </g>
+          <!-- puerto de 2.5 Gb -->
+          <g class="mk-p25" transform="translate(300 58)">
+            <use href="#mkRj45"/>
+            <text x="48" y="24" class="mk-p25-tx">2.5G</text>
+            <circle class="mk-led" cx="20" cy="-6" r="4"/>
+          </g>
+          <!-- cable con la luz de la fibra -->
+          <path class="mk-cable" d="M320 96 V150 Q320 176 346 176 H510"/>
+          <path class="mk-luz" d="M510 176 H346 Q320 176 320 150 V96" filter="url(#mkBrillo)"/>
+          <rect x="310" y="92" width="20" height="14" rx="2" class="mk-plug"/>
+          <text x="512" y="200" text-anchor="end" class="mk-r-tx">2000 Mbps</text>
+        </svg>
+        <ul class="mk-comp">
+          <li><i class="mk-dot1"></i><span>Puerto de <b>1&nbsp;Gb</b></span><em>hasta 1000 Mbps</em></li>
+          <li><i class="mk-dot25"></i><span>Puerto de <b>2.5&nbsp;Gb</b> o <b>10&nbsp;Gb</b></span><em>los 2000 Mbps del Duo</em></li>
+        </ul>
+        <p>Búscalo atrás de tu computadora, consola o router. Muchos equipos marcan el de 2.5&nbsp;Gb en azul o con la leyenda <b>2.5G</b> a un lado; los de 1&nbsp;Gb suelen ser amarillos. Conéctalo por cable para medir más de 1000 Mbps.</p>
+        <a class="mk-link" href="https://wa.me/5216567646127">¿No sabes cuál tiene tu equipo? Pregúntanos</a>
       </div>
     </div>
   </div>
