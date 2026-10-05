@@ -5,6 +5,8 @@
 .mk-vel{gap:18px;margin-top:10px;align-items:center}
 .mk-vel b{font-size:clamp(84px,11vw,150px)!important;line-height:.9}
 .mk-vel span{font-size:clamp(16px,1.8vw,22px)!important;line-height:1.15;color:var(--concha-70)}
+/* "Megas" es más ancho que "Mbps": en pantalla ancha "de bajada" se partía en dos renglones. En celular sí se deja partir, o no cabe. */
+@media (min-width:760px){.mk-vel span{white-space:nowrap}}
 /* Precios a la mitad */
 .mk-precio{gap:28px;margin-top:22px;align-items:flex-end}
 .mk-precio .et{font-size:10px}
