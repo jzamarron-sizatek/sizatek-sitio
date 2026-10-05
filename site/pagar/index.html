@@ -89,8 +89,8 @@
         <h2 class="marca"><span><img src="/assets/tapipay.png" alt="tapipay"
           width="406" height="118" decoding="async"></span></h2>
         <p>Paga con tarjeta, transferencia o en efectivo en Alsuper, Waldos y
-          Soriana. Pídela por WhatsApp y te llega tu liga, con lo que debes ya
-          puesto.</p>
+          Soriana. Entra al portal con tu número de cliente, o pide tu liga por
+          WhatsApp y te llega con lo que debes ya puesto.</p>
 
         <!-- AQUÍ HABÍA UN CAMPO PARA TECLEAR EL NÚMERO DE CLIENTE. SE QUITÓ, Y
              LA RAZÓN IMPORTA MÁS QUE EL CÓDIGO.
@@ -112,11 +112,17 @@
 
              El campo vuelve cuando exista ese código, detrás de él.
              Ver claude/pago-en-linea-autenticado.md. -->
-        <p class="fila-sola">
-          <a class="btn btn-luz" href="https://wa.me/526361270860?text=Hola%2C%20quiero%20pagar%20mi%20servicio%20en%20l%C3%ADnea.">Pedir
+        <!-- 5-oct-2026, Jose: un "Pagar aquí" igual al de Pagoralia, al portal
+             de tapipay (app.tapipay.la/s/sizatek). Es SU página: el cliente
+             teclea su número allá, no en un campo de Sizatek (ver la nota de
+             arriba). La liga por WhatsApp se queda como segunda opción. -->
+        <p class="fila-sola" style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-luz" href="https://app.tapipay.la/s/sizatek">Pagar aquí</a>
+          <a class="btn btn-ghost" href="https://wa.me/526361270860?text=Hola%2C%20quiero%20pagar%20mi%20servicio%20en%20l%C3%ADnea.">Pedir
             mi liga por WhatsApp</a>
         </p>
-        <p class="chico">Te identificamos con el teléfono que tienes registrado
+        <p class="chico">En el portal, ten a la mano tu número de cliente. Por
+          WhatsApp te identificamos con el teléfono que tienes registrado
           y te mandamos tu liga de pago. Si cambiaste de número,
           <a href="https://wa.me/526361270860?text=Hola%2C%20cambi%C3%A9%20de%20n%C3%BAmero%20y%20quiero%20actualizarlo%20para%20pagar%20en%20l%C3%ADnea.">avísanos
           por el mismo WhatsApp</a> y una agente lo actualiza.</p>
