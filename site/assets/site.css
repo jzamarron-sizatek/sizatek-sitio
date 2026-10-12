@@ -46,9 +46,9 @@
   .btn-luz:hover{box-shadow:0 8px 32px -8px rgba(27,231,255,.65)}
   .btn-ghost{border-color:var(--concha-15);color:var(--concha);background:transparent}
   .btn-ghost:hover{border-color:var(--teal);background:var(--concha-08)}
-  .btn-wa{background:#25D366;color:#06210F}
+  .btn-wa{background:var(--luz);color:#04203A}
   .btn-tg{background:#2AABEE;color:#04203A}
-  .btn-wa:hover{box-shadow:0 8px 32px -8px rgba(37,211,102,.6)}
+  .btn-wa:hover{box-shadow:0 8px 32px -8px rgba(27,231,255,.6)}
   .btn svg{width:16px;height:16px;flex:none}
 
   /* ── nav ── */
@@ -281,8 +281,26 @@
   @media (max-width:560px){.fgrid{grid-template-columns:1fr}}
 
   /* flotante WhatsApp */
-  .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-content:center;color:#06210F;box-shadow:0 12px 30px -8px rgba(37,211,102,.7)}
+  .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--luz);display:grid;place-content:center;color:#04203A;box-shadow:0 12px 30px -8px rgba(27,231,255,.6)}
   .wa-float svg{width:28px;height:28px}
+
+  /* Selector de contacto (11-oct-2026): Telegram y Mi Sizatek antes que WhatsApp */
+  .ct-fondo{position:fixed;inset:0;z-index:90;background:rgba(5,11,26,.72);backdrop-filter:blur(6px);display:grid;place-content:end center;padding:16px}
+  .ct-fondo[hidden]{display:none}
+  @media (min-width:641px){.ct-fondo{place-content:center}}
+  .ct-caja{position:relative;width:min(420px,calc(100vw - 32px));background:var(--noche-2);border:1px solid var(--concha-15);border-radius:18px;padding:22px 18px 18px;display:grid;gap:10px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+  .ct-caja h3{margin:0 0 6px;font-family:var(--display);font-size:1.05rem;font-weight:600}
+  .ct-x{position:absolute;top:10px;right:12px;background:none;border:0;color:var(--concha-70);font-size:1.6rem;line-height:1;cursor:pointer;padding:4px 8px}
+  .ct-op{display:flex;gap:14px;align-items:center;padding:13px 14px;border-radius:12px;border:1px solid var(--concha-15);color:var(--concha);text-decoration:none;background:var(--concha-08);transition:border-color .15s,background .15s}
+  .ct-op:hover,.ct-op:focus-visible{border-color:var(--luz);background:var(--noche-3)}
+  .ct-op>svg{flex:none;width:28px;height:28px}
+  .ct-op span{display:grid;gap:2px}
+  .ct-op b{font-weight:600}
+  .ct-op small{color:var(--concha-70);font-size:.82rem;line-height:1.35}
+  .ct-tg>svg{color:#2AABEE}.ct-app>svg{color:var(--luz)}.ct-wa>svg{color:#25D366}
+  .ct-wa{opacity:.85}
+  .ct-bajar{display:inline!important;color:var(--luz);text-decoration:underline;cursor:pointer}
+  body.ct-abierto{overflow:hidden}
   .tg-float{position:fixed;right:18px;bottom:88px;z-index:60;width:58px;height:58px;border-radius:50%;background:#2AABEE;display:grid;place-content:center;color:#fff;box-shadow:0 12px 30px -8px rgba(42,171,238,.7)}
   .tg-float svg{width:26px;height:26px;margin-left:-2px}
 

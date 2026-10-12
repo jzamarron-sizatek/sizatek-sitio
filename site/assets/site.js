@@ -25,7 +25,8 @@
   if(fc)fc.addEventListener('submit',function(e){
     e.preventDefault();
     var f=e.target,parts=[f.nombre.value,f.tel.value,f.correo.value,f.msg.value].filter(Boolean);
-    window.open('https://wa.me/5216567646127?text='+encodeURIComponent(parts.join('\n')),'_blank');
+    var u='https://wa.me/5216567646127?text='+encodeURIComponent(parts.join('\n'));
+    if(window.SizatekContacto)window.SizatekContacto.abrir(u,f.querySelector('[type=submit]'));else window.open(u,'_blank');
   });
 
   // hero: la luz viajando, de fondo (Canvas)
@@ -69,7 +70,7 @@
     var box=document.getElementById('cob');if(!box)return;
     var gps=document.getElementById('cobGps'),res=document.getElementById('cobRes'),note=document.getElementById('cobNote'),mapEl=document.getElementById('cobMap');
     var API='https://velocidad.sizatek.com/api/cobertura',WA='https://wa.me/5216567646127';
-    var ico='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.1 5.1 0 0 0 3.1.6 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    var ico='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm3 6.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6Zm5 0a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6Zm5 0a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6Z"/></svg>';
     var map=null,pin=null;
     function initMap(){if(map||typeof L==='undefined')return;map=L.map(mapEl,{zoomControl:true,attributionControl:true,scrollWheelZoom:false}).setView([30.4125,-107.9165],13);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
@@ -188,4 +189,58 @@
   } else {
     arrancar();
   }
+})();
+
+// ── Contacto (11-oct-2026): Telegram y Mi Sizatek primero, WhatsApp al final ──
+// Jose: "sustituir el icono de whatsapp por un icono de mensajeria... para
+// saltarnos whatsapp y que nos cueste menos". Todo enlace a wa.me (también los
+// que arma la calculadora o el verificador de cobertura) abre este selector en
+// vez de WhatsApp directo. WhatsApp se queda como última opción para quien no
+// tiene Telegram ni es cliente. Un enlace con data-directo va directo.
+(function(){
+  var BOT='https://t.me/Sizatek_telebot',APP='https://app.sizatek.online/cliente/',BAJAR='https://app.sizatek.online/descargas/mi-sizatek.html';
+  var ICO={
+    tg:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13 1.4 11.5c-1-.3-1.1-1 .2-1.5L20.6 2.7c.9-.3 1.6.2 1.3 1.6Z"/></svg>',
+    app:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 6h4M12 18h.01"/></svg>',
+    wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.1 5.1 0 0 0 3.1.6 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>'
+  };
+  var caja=null,ultimo=null;
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  // Ventas (contratar, paquetes, cobertura) → Comercial; lo demás → Soporte.
+  // El flotante sale en todas las páginas: sin departamento, el bot pregunta.
+  function depto(url,el){
+    if(el&&el.classList&&el.classList.contains('wa-float'))return '';
+    var t=(el?(el.textContent||''):'')+' '+decodeURIComponent(url||'')+' '+location.pathname;
+    if(/pagar|pago|n[uú]mero de cliente|cambi[eé] de n[uú]mero/i.test(t))return 'soporte';
+    return /contrat|quiero|agendar|interesa|direcci|paquete|calcula|cobertura|instalaci/i.test(t)?'comercial':'soporte';
+  }
+  function numero(url){var m=String(url).match(/wa\.me\/(\d+)/),d=m?m[1].slice(-10):'6567646127';return d.slice(0,3)+' '+d.slice(3,6)+' '+d.slice(6)}
+  function texto(url){var m=String(url).match(/[?&]text=([^&]*)/);try{return m?decodeURIComponent(m[1].replace(/\+/g,' ')).trim():''}catch(e){return ''}}
+  function cerrar(){if(caja){caja.hidden=true;document.body.classList.remove('ct-abierto');if(ultimo)ultimo.focus()}}
+  function abrir(url,el){
+    ultimo=el||document.activeElement;
+    var d=depto(url,el),msg=texto(url);
+    if(!caja){caja=document.createElement('div');caja.className='ct-fondo';caja.hidden=true;document.body.appendChild(caja);
+      caja.addEventListener('click',function(e){if(e.target===caja||e.target.closest('[data-ct-cerrar]'))cerrar()});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&caja&&!caja.hidden)cerrar()});}
+    caja.innerHTML='<div class="ct-caja" role="dialog" aria-modal="true" aria-labelledby="ct-t">'
+      +'<button class="ct-x" type="button" data-ct-cerrar aria-label="Cerrar">×</button>'
+      +'<h3 id="ct-t">¿Por dónde nos escribes?</h3>'
+      +'<a class="ct-op ct-tg" href="'+BOT+(d?'?start='+d:'')+'" target="_blank" rel="noopener">'+ICO.tg+'<span><b>Telegram</b><small>Te atiende '+(d==='comercial'?'Ventas':d==='soporte'?'Soporte':'una persona')+' al momento'+(msg?'. Copiamos tu mensaje para que solo lo pegues':'')+'</small></span></a>'
+      +'<a class="ct-op ct-app" href="'+APP+'" target="_blank" rel="noopener">'+ICO.app+'<span><b>Ya soy cliente · Mi Sizatek</b><small>Chat, saldo y pagos con tu número de cliente. <span class="ct-bajar" data-bajar>Bajar la app Android</span></small></span></a>'
+      +'<a class="ct-op ct-wa" href="'+esc(url)+'" target="_blank" rel="noopener">'+ICO.wa+'<span><b>WhatsApp</b><small>'+numero(url)+'</small></span></a>'
+      +'</div>';
+    var tg=caja.querySelector('.ct-tg');
+    if(msg&&navigator.clipboard)tg.addEventListener('click',function(){navigator.clipboard.writeText(msg).catch(function(){})});
+    caja.querySelector('[data-bajar]').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();window.open(BAJAR,'_blank','noopener')});
+    caja.querySelectorAll('.ct-op').forEach(function(a){a.addEventListener('click',function(){setTimeout(cerrar,50)})});
+    caja.hidden=false;document.body.classList.add('ct-abierto');
+    tg.focus();
+  }
+  window.SizatekContacto={abrir:abrir};
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href*="wa.me/"]');
+    if(!a||a.hasAttribute('data-directo')||a.closest('.ct-caja')||e.ctrlKey||e.metaKey||e.shiftKey)return;
+    e.preventDefault();abrir(a.href,a);
+  },true); // en captura: algunos enlaces (los del <summary> de paquetes) detienen la propagación
 })();
