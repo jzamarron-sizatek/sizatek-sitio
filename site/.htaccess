@@ -15,7 +15,9 @@ RewriteRule ^internet-rapido-para-hogares-y-empresas-sizatek/nosotros/?$ /nosotr
 RewriteRule ^(internet-rapido-para-hogares-y-empresas-sizatek/)?encuentra-tu-paquete-de-internet-ideal-en-sizatek-guia-personalizada/?$ /contacto/ [R=301,L]
 RewriteRule ^prueba-tu-velocidad/?$ /velocidad/ [R=301,L]
 RewriteRule ^(internet-rapido-para-hogares-y-empresas-sizatek/)?mi-cuenta(/.*)?$ https://clientes.sizatek.com/cliente/login [R=301,L]
-RewriteRule ^aviso-de-privacidad-2/?$ /wp-content/uploads/2024/07/aviso-de-privacidad.pdf [R=301,L]
+RewriteRule ^aviso-de-privacidad-2/?$ /legales/aviso-de-privacidad/ [R=301,L]
+# El PDF viejo del aviso (2024) manda al vigente
+RewriteRule ^wp-content/uploads/2024/07/aviso-de-privacidad\.pdf$ /legales/aviso-de-privacidad/aviso-de-privacidad.pdf [R=301,L]
 RewriteRule ^tet/?$ / [R=301,L]
 # WordPress ya no existe aquí
 RewriteRule ^(wp-admin|wp-login\.php|wp-json|xmlrpc\.php|wp-includes)(/.*)?$ - [G,L]
