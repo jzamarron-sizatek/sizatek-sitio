@@ -23,6 +23,20 @@ RewriteRule ^tet/?$ / [R=301,L]
 RewriteRule ^(wp-admin|wp-login\.php|wp-json|xmlrpc\.php|wp-includes)(/.*)?$ - [G,L]
 RewriteRule ^wp-content/(?!uploads/).*$ - [G,L]
 
+# El sitio es estático: ningún PHP se ejecuta aquí (21-oct-2026, PHP2Shell,
+# CVE-2026-109618/109619). Cubre también los restos del WordPress viejo que se
+# quedaron en el servidor (wordpress/, _wp-anterior/), que las reglas de arriba
+# no alcanzan (aplica a las subcarpetas; el .htaccess de WordPress no lo deshace).
+<FilesMatch "\.(php[0-9]?|phtml|phar|inc)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
 ErrorDocument 404 /404.html
 
 # ── Seguridad ──
